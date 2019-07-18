@@ -8,6 +8,9 @@
 #import <TDOAuth/TDOAuth.h>
 #import <Accounts/Accounts.h>
 #import <Social/Social.h>
+#import "JasonNetworking.h"
+
+#pragma message "TODO: Update managers to use JasonNetworking"
 
 @implementation JasonOauthAction
 - (void)performSocialFrameworkRequestFor:(ACAccount *)account {
@@ -317,6 +320,10 @@
             }
 
             [[manager dataTaskWithRequest:request
+                           uploadProgress:^(NSProgress * _Nonnull uploadProgress) {
+                           }
+                         downloadProgress:^(NSProgress * _Nonnull downloadProgress) {
+                         }
                         completionHandler:^(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error) {
                             if (!error) {
                             [[Jason client] success:responseObject];
@@ -687,6 +694,10 @@
                     manager.requestSerializer = [AFJSONRequestSerializer serializer];
 
                     NSURLSessionDataTask * task = [manager dataTaskWithRequest:request
+                                                                uploadProgress:^(NSProgress * _Nonnull uploadProgress) {
+                                                                }
+                                                              downloadProgress:^(NSProgress * _Nonnull downloadProgress) {
+                                                              }
                                                              completionHandler:^(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error) {
                                                                  // Ignore if the url is different
                                                                  if (![request.URL.absoluteString isEqualToString:response.URL.absoluteString]) {
@@ -736,6 +747,7 @@
                                                                  [[Jason client] error];
                                                                  }
                                                              }];
+
                     [task resume];
                 }
             }
@@ -849,7 +861,7 @@
             *
             ********************************************************************************/
             NSString * client_id = self.options[@"authorize"][@"client_id"];
-            NSString * client_secret = self.options[@"authorize"][@"client_secret"];
+            //NSString * client_secret = self.options[@"authorize"][@"client_secret"];
 
             NSDictionary * authorize_options = self.options[@"authorize"];
 
@@ -976,11 +988,16 @@
                                                      consumerSecret:client_secret
                                                         accessToken:oauth_token
                                                         tokenSecret:oauth1_three_legged_secret];
+
                 AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
                 manager.responseSerializer = [AFHTTPResponseSerializer serializer];
                 manager.requestSerializer = [AFJSONRequestSerializer serializer];
 
                 NSURLSessionDataTask * task = [manager dataTaskWithRequest:request
+                                                            uploadProgress:^(NSProgress * _Nonnull uploadProgress) {
+                                                            }
+                                                          downloadProgress:^(NSProgress * _Nonnull downloadProgress) {
+                                                          }
                                                          completionHandler:^(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error) {
                                                              // Ignore if the url is different
                                                              if (![request.URL.absoluteString isEqualToString:response.URL.absoluteString]) {
@@ -1014,6 +1031,7 @@
                                                              [[Jason client] error];
                                                              }
                                                          }];
+
                 [task resume];
             }
         }

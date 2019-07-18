@@ -79,11 +79,12 @@
                 name:UIApplicationDidEnterBackgroundNotification
               object:nil];
 
+        [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
         [[NSNotificationCenter defaultCenter]
          addObserver:self
-            selector:@selector(onOrientationChange)
-                name:UIApplicationDidChangeStatusBarOrientationNotification
-              object:nil];
+            selector:@selector(onOrientationChange:)
+                name:UIDeviceOrientationDidChangeNotification
+              object:[UIDevice currentDevice]];
 
         self.searchMode = NO;
         self.services = [@{} mutableCopy];
@@ -1932,7 +1933,9 @@
 }
 
 - (NSDictionary *)getEnv {
-    NSMutableDictionary * dict = [[NSMutableDictionary alloc] init];
+    DTLogDebug (@"Getting ENV");
+
+    NSMutableDictionary * dict = [@{} mutableCopy];
     NSURL * file = [[NSBundle mainBundle] URLForResource:@"Info" withExtension:@"plist"];
     NSDictionary * info_plist = [NSDictionary dictionaryWithContentsOfURL:file];
 
@@ -1945,37 +1948,40 @@
 
     CGRect bounds = [[UIScreen mainScreen] bounds];
     dict[@"device"] = @{
-            @"width": [NSNumber numberWithFloat:bounds.size.width],
-            @"height": [NSNumber numberWithFloat:bounds.size.height],
+            @"width": @(bounds.size.width),
+            @"height": @(bounds.size.height),
             @"os": @{ @"name": @"ios", @"version": [[UIDevice currentDevice] systemVersion] },
             @"language": [[NSLocale preferredLanguages] objectAtIndex:0]
     };
 
     dict[@"view"] = @{
-            @"url": VC.url
+            @"url": self->VC.url
     };
+
     return dict;
 }
 
 - (NSDictionary *)variables {
-    NSMutableDictionary * data_stub = [[NSMutableDictionary alloc] init];
+    DTLogDebug (@"Getting Variables");
 
-    if (VC.data) {
-        for (NSString * key in VC.data) {
+    NSMutableDictionary * data_stub = [@{} mutableCopy];
+
+    if (self->VC.data) {
+        for (NSString * key in self->VC.data) {
             if (![key isEqualToString:@"$jason"]) {
                 data_stub[key] = VC.data[key];
             }
         }
     }
 
-    if (VC.form) {
-        data_stub[@"$get"] = VC.form;
+    if (self->VC.form) {
+        data_stub[@"$get"] = self->VC.form;
     } else {
         data_stub[@"$get"] = @{};
     }
 
-    if (VC.options) {
-        data_stub[@"$params"] = VC.options;
+    if (self->VC.options) {
+        data_stub[@"$params"] = self->VC.options;
     } else {
         data_stub[@"$params"] = @{};
     }
@@ -1983,7 +1989,7 @@
     NSArray * keys = [self getKeys];
 
     if (keys && keys.count > 0) {
-        NSMutableDictionary * dict = [NSMutableDictionary dictionary];
+        NSMutableDictionary * dict = [@{} mutableCopy];
 
         for (NSDictionary * kv in keys) {
             NSString * key = kv[@"key"];
@@ -2006,20 +2012,20 @@
     NSDictionary * env = [self getEnv];
     data_stub[@"$env"] = env;
 
-    if (VC.current_cache) {
-        if (VC.current_cache.count > 0) {
-            data_stub[@"$cache"] = VC.current_cache;
+    if (self->VC.current_cache) {
+        if (self->VC.current_cache.count > 0) {
+            data_stub[@"$cache"] = self->VC.current_cache;
         } else {
             data_stub[@"$cache"] = @{};
         }
     } else {
         // Fetch the cache from NSUserDefaults only the first time.
         // After this, VC.current_cache will update only when a $set action is called.
-        NSString * normalized_url = [VC.url lowercaseString];
-        VC.current_cache = [[NSUserDefaults standardUserDefaults] objectForKey:normalized_url];
+        NSString * normalized_url = [self->VC.url lowercaseString];
+        self->VC.current_cache = [[NSUserDefaults standardUserDefaults] objectForKey:normalized_url];
 
-        if (VC.current_cache && VC.current_cache.count > 0) {
-            data_stub[@"$cache"] = VC.current_cache;
+        if (self->VC.current_cache && self->VC.current_cache.count > 0) {
+            data_stub[@"$cache"] = self->VC.current_cache;
         } else {
             data_stub[@"$cache"] = @{};
         }
@@ -2054,15 +2060,33 @@
 }
 
 # pragma mark - View rendering (high level)
+
+
+/**
+ * Redraws the view with the current json
+ */
+- (void)refresh
+{
+    NSDictionary * json = [self->VC.original mutableCopy];
+
+    json[@"$jason"][@"body"][@"background"][@"com.jasonelle.state:stop-reloading"] = @YES;
+
+    DTLogInfo (@"Redrawing View %@", json);
+
+    [self
+     drawViewFromJason:json
+               asFinal:YES];
+}
+
 - (void)reload
 {
     DTLogInfo (@"Reloading View");
 
-    VC.data = nil;
-    VC.form = [@{} mutableCopy];
+    self->VC.data = nil;
+    self->VC.form = [@{} mutableCopy];
 
-    if (VC.url) {
-        [self networkLoading:VC.loading with:nil];
+    if (self->VC.url) {
+        [self networkLoading:self->VC.loading with:nil];
         AFHTTPSessionManager * manager = [JasonNetworking manager];
         NSDictionary * session = [JasonHelper sessionForUrl:VC.url];
 
@@ -2092,8 +2116,8 @@
 
         NSMutableDictionary * parameters = nil;
 
-        if (VC.options[@"data"]) {
-            parameters = [VC.options[@"data"] mutableCopy];
+        if (self->VC.options[@"data"]) {
+            parameters = [self->VC.options[@"data"] mutableCopy];
         } else {
             if (session && session.count > 0 && session[@"body"]) {
                 parameters = [@{} mutableCopy];
@@ -2104,7 +2128,7 @@
             }
         }
 
-        if (VC.fresh) {
+        if (self->VC.fresh) {
             DTLogDebug (@"Ignoring Cache Because `fresh` was enabled");
             [manager.requestSerializer
              setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
@@ -2117,7 +2141,7 @@
             parameters[@"timestamp"] = [NSString stringWithFormat:@"%d", timestamp];
         }
 
-        VC.contentLoaded = NO;
+        self->VC.contentLoaded = NO;
 
         /**************************************************
          * Experimental : Offline handling
@@ -2146,29 +2170,38 @@
                     [responseObject[@"$jason"][@"head"][@"actions"] removeObjectForKey:@"$show"];
                 }
 
-                VC.offline = YES;
+                self->VC.offline = YES;
                 [self drawViewFromJason:responseObject asFinal:NO];
             }
         }
 
-        VC.requires = [@{} mutableCopy];
+        self->VC.requires = [@{} mutableCopy];
 
         /**************************************************
          * Handling data uri
          ***************************************************/
-        if ([VC.url hasPrefix:@"data:application/json"]) {
+        if ([self->VC.url hasPrefix:@"data:application/json"]) {
         // if data uri, parse it into NSData
-            NSURL * url = [NSURL URLWithString:VC.url];
+            NSURL * url = [NSURL URLWithString:self->VC.url];
             NSData * jsonData = [NSData dataWithContentsOfURL:url];
             NSError * error;
-            VC.original = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:&error];
-            [self drawViewFromJason:VC.original asFinal:YES];
-        } else if ([VC.url hasPrefix:@"file://"]) {
-            [self loadViewByFile:VC.url asFinal:YES];
+
+            self->VC.original = [NSJSONSerialization
+                                 JSONObjectWithData:jsonData
+                                            options:kNilOptions
+                                              error:&error];
+
+            if (error) {
+                DTLogWarning (@"Error parsing json. %@ %@", self->VC.url, error);
+            } else {
+                [self drawViewFromJason:self->VC.original asFinal:YES];
+            }
+        } else if ([self->VC.url hasPrefix:@"file://"]) {
+            [self loadViewByFile:self->VC.url asFinal:YES];
         }
-        /**************************************************
-         * Normally urls are not in data-uri.
-         ***************************************************/
+        /************************************r**************
+        * Normally urls are not in data-uri.
+        ***************************************************/
         else {
             AFJSONResponseSerializer * jsonResponseSerializer = [JasonNetworking serializer];
             NSMutableSet * jsonAcceptableContentTypes = [NSMutableSet setWithSet:jsonResponseSerializer.acceptableContentTypes];
@@ -2190,25 +2223,25 @@
 
 #pragma message "Start Request in Reload"
 
-            [manager   GET:VC.url
+            [manager   GET:self->VC.url
                 parameters:parameters
                   progress:^(NSProgress * _Nonnull downloadProgress) { }
                    success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
                        // Ignore if the url is different
                        if (![JasonHelper  isURL:task.originalRequest.URL
-                            equivalentTo      :VC.url]) {
+                            equivalentTo      :self->VC.url]) {
                        return;
                        }
 
-                       VC.original = responseObject;
+                       self->VC.original = responseObject;
 
                        [self include:responseObject
                                          andCompletionHandler:^(id res)
                 {
                     dispatch_async (dispatch_get_main_queue (), ^{
-                                        VC.contentLoaded = NO;
+                                        self->VC.contentLoaded = NO;
 
-                                        VC.original = @{ @"$jason": res[@"$jason"] };
+                                        self->VC.original = @{ @"$jason": res[@"$jason"] };
                                         [self drawViewFromJason:VC.original
                                                         asFinal:YES];
                                     });
@@ -2216,7 +2249,7 @@
                    }
                    failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
             {
-                if (!VC.offline) {
+                if (!self->VC.offline) {
                     DTLogWarning (@"%@", error);
                     [[Jason client] loadViewByFile:@"file://error.json"
                                            asFinal:YES];
@@ -2343,6 +2376,7 @@
             } else if (rendered_page[@"background"]) {
                 if ([rendered_page[@"background"] isKindOfClass:[NSDictionary class]]) {
             // Advanced background
+                    DTLogDebug (@"Detected Advanced Background");
                     [self drawAdvancedBackground:rendered_page[@"background"]];
                 } else {
                     [self drawBackground:rendered_page[@"background"]];
@@ -2403,8 +2437,11 @@
         return;
     }
 
+    DTLogDebug (@"Drawing Advanced Background %@", bg);
+
     if (type) {
         if ([type isEqualToString:@"camera"]) {
+            DTLogDebug (@"Drawing camera");
             NSDictionary * options = bg[@"options"];
 
             if (vc.background) {
@@ -2417,6 +2454,8 @@
             avPreviewLayer = nil;
             [self buildCamera:options forVC:vc];
         } else if ([type isEqualToString:@"html"]) {
+            DTLogDebug (@"Drawing html");
+
             if (self.avCaptureSession) {
                 [self.avCaptureSession stopRunning];
                 self.avCaptureSession = nil;
@@ -2431,7 +2470,7 @@
                 }
             }
 
-            NSMutableDictionary * payload = [[NSMutableDictionary alloc] init];
+            NSMutableDictionary * payload = [@{} mutableCopy];
 
             if (bg[@"url"]) {
                 payload[@"url"] = bg[@"url"];
@@ -2450,7 +2489,15 @@
                 payload[@"action"] = bg[@"action"];
             }
 
+            if (bg[@"com.jasonelle.state:stop-reloading"]) {
+                payload[@"com.jasonelle.state:stop-reloading"] = @YES;
+            }
+
+            DTLogDebug (@"Loading Background with Payload %@", payload);
+
+#pragma message "JasonAgentService Setup"
             JasonAgentService * agent = self.services[@"JasonAgentService"];
+
             vc.background = [agent setup:payload withId:payload[@"id"]];
 
             // Need to make the background transparent so that it doesn't flash white when first loading
@@ -2458,7 +2505,12 @@
             vc.background.backgroundColor = [UIColor clearColor];
             vc.background.hidden = NO;
 
+
+#pragma message "Agent Webview frame"
             int height = [UIScreen mainScreen].bounds.size.height;
+            int width = [UIScreen mainScreen].bounds.size.width;
+            int x = 0;
+            int y = 0;
 
             if (!tabController.tabBar.hidden) {
                 height = height - tabController.tabBar.frame.size.height;
@@ -2469,7 +2521,33 @@
                 height = height - vc.composeBarView.frame.size.height;
             }
 
-            CGRect rect = CGRectMake (0, 0, [UIScreen mainScreen].bounds.size.width, height);
+            CGRect rect = CGRectMake (x, y, width, height);
+
+            if (@available(iOS 11, *)) {
+                // Take in consideration safe areas available in iOS 11
+                y = -vc.view.safeAreaInsets.top;
+                height = [UIScreen mainScreen].bounds.size.height +
+                    vc.view.safeAreaInsets.top +
+                    vc.view.safeAreaInsets.bottom;
+
+
+                x = -vc.view.safeAreaInsets.left;
+                width = [UIScreen mainScreen].bounds.size.width +
+                    vc.view.safeAreaInsets.left +
+                    vc.view.safeAreaInsets.right;
+
+                if (!tabController.tabBar.hidden) {
+                    height = height - tabController.tabBar.frame.size.height;
+                }
+
+                if (vc.composeBarView) {
+                    // footer.input exists
+                    height = height - vc.composeBarView.frame.size.height;
+                }
+
+                rect = CGRectMake (x, y, width, height);
+            }
+
             vc.background.frame = rect;
 
             UIProgressView * progressView = [vc.background viewWithTag:42];
@@ -2782,7 +2860,7 @@
 #pragma message "Sets the Status Bar"
 
         if (headStyle[@"bar"]) {
-            NSString * mode = headStyle[@"bar"];
+            NSString * mode = [headStyle[@"bar"] lowercaseString];
 
             if ([mode isEqualToString:@"default"] ||
                 [mode isEqualToString:@"dark"] ||
@@ -3452,7 +3530,6 @@
                     // check the URLs and update if changed.
                     if ([v.url isEqualToString:url]) {
                     // Do nothing
-#pragma message "TODO: Check if Tabs Refresh on Double Tab"
                         v.tabNeedsRefresh = YES;
                         tabFound = YES;
                     } else {
@@ -3534,7 +3611,9 @@
 
             DTLogDebug (@"Tab %ld contains href %@", indexOfTab, href);
 
-            if (VC.tabNeedsRefresh) {
+#pragma message "TabBar Refresh"
+
+            if (self->VC.tabNeedsRefresh) {
                 DTLogDebug (@"Tab %ld Needs Refresh", indexOfTab);
                 [[Jason client] call:@{ @"type": @"$reload" }];
                 return YES;
@@ -3696,7 +3775,7 @@
 
 - (void)onShow
 {
-    NSDictionary * events = [VC valueForKey:@"events"];
+    NSDictionary * events = [self->VC valueForKey:@"events"];
 
     if (events) {
         if (events[@"$show"]) {
@@ -3720,10 +3799,10 @@
 - (void)onLoad:(Boolean)online
 {
     [JasonMemory client].executing = NO;
-    NSDictionary * events = [VC valueForKey:@"events"];
+    NSDictionary * events = [self->VC valueForKey:@"events"];
 
     if (events && events[@"$load"]) {
-        if (!VC.contentLoaded) {
+        if (!self->VC.contentLoaded) {
             DTLogInfo (@"Calling $load event");
             NSDictionary * variables = [self variables];
             DTLogDebug (@"%@", variables);
@@ -3744,7 +3823,7 @@
 - (void)onBackground
 {
     isForeground = NO;
-    NSDictionary * events = [VC valueForKey:@"events"];
+    NSDictionary * events = [self->VC valueForKey:@"events"];
 
     if (events) {
         if (events[@"$background"]) {
@@ -3762,7 +3841,7 @@
 
     // Don't trigger if the view has already come foreground once (because this can be triggered by things like push notification / geolocation alerts)
     if (!isForeground) {
-        NSDictionary * events = [VC valueForKey:@"events"];
+        NSDictionary * events = [self->VC valueForKey:@"events"];
 
         if (events) {
             if (events[@"$foreground"]) {
@@ -3775,18 +3854,37 @@
     isForeground = YES;
 }
 
-- (void)onOrientationChange
-{
-    DTLogDebug (@"Changed Orientation");
+#pragma mark Orientation Change
+- (void)onOrientationChange:(NSNotification *)notification {
+    UIDevice * device = notification.object;
 
-    // Fix wkwebview orientation change made by @ricardojlpinto  https://github.com/Jasonette/JASONETTE-iOS/pull/358
-    JasonViewController * vc = (JasonViewController *)[[Jason client] getVC];
-    WKWebView * agent = vc.agents[@"$webcontainer"];
+    if (!device) {
+        DTLogWarning (@"No device");
+        return;
+    }
 
-    if (agent) {
-        DTLogDebug (@"$webcontainer agent detected");
-        CGRect bounds = [[UIScreen mainScreen] bounds];
-        agent.frame = bounds;
+    DTLogDebug (@"Changed Orientation to %ld", device.orientation);
+
+    NSDictionary * events = [self->VC valueForKey:@"events"];
+
+    if (events) {
+        if (events[@"$orientation.changed"]) {
+            CGRect frame = [UIScreen mainScreen].bounds;
+
+            NSDictionary * params = @{
+                    @"$jason": @{
+                        @"id": @(device.orientation),
+                        @"portrait": @(UIDeviceOrientationIsPortrait (device.orientation)),
+                        @"size": @{
+                            @"width": @(frame.size.width),
+                            @"height": @(frame.size.height)
+                        }
+                    }
+            };
+
+            DTLogInfo (@"Calling $orientation.changed event %@", params);
+            [self call:events[@"$orientation.changed"] with:params];
+        }
     }
 }
 

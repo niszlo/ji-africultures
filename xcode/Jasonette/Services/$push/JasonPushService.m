@@ -72,7 +72,13 @@
 
     if (events) {
         if (events[@"$push.onregister"]) {
-            [[Jason client] call:events[@"$push.onregister"] with:@{ @"$jason": @{ @"token": payload[@"token"] } }];
+            NSDictionary * params = @{ @"$jason":
+                                       @{ @"token":
+                                          payload[@"token"] } };
+
+            DTLogDebug (@"Calling $push.onregister event with params %@", params);
+
+            [[Jason client] call:events[@"$push.onregister"] with:params];
         }
     }
 }
@@ -84,11 +90,15 @@
     completionHandler (UNNotificationPresentationOptionNone);
 }
 
-- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
     if (response.notification.request.content.userInfo) {
+        DTLogDebug (@"Received Notification Response %@", response.notification.request.content.userInfo);
+
         if (response.notification.request.content.userInfo[@"href"]) {
+            DTLogDebug (@"Show href");
             [[Jason client] go:response.notification.request.content.userInfo[@"href"]];
         } else if (response.notification.request.content.userInfo[@"action"]) {
+            DTLogDebug (@"Executing Action");
             [[Jason client] call:response.notification.request.content.userInfo[@"action"]];
         }
     }

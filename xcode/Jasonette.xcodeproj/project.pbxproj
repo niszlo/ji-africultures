@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		5EE85B6C1DA45F8F0049EACE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EE85B6B1DA45F8F0049EACE /* MapKit.framework */; };
+		ACDAE25BCC06F4D2B1364277 /* Pods_Jasonette.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDE1A3D4D97BE5A73CB39B96 /* Pods_Jasonette.framework */; };
 		EF07303A22D28B2400973DE1 /* settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = EF072F5F22D28B2400973DE1 /* settings.plist */; };
-		EF07303B22D28B2400973DE1 /* hello.json in Resources */ = {isa = PBXBuildFile; fileRef = EF072F6022D28B2400973DE1 /* hello.json */; };
+		EF07303B22D28B2400973DE1 /* com.jasonelle.app.test.webview.json in Resources */ = {isa = PBXBuildFile; fileRef = EF072F6022D28B2400973DE1 /* com.jasonelle.app.test.webview.json */; };
 		EF07303C22D28B2400973DE1 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF072F6222D28B2400973DE1 /* Media.xcassets */; };
 		EF07303D22D28B2400973DE1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF072F6322D28B2400973DE1 /* LaunchScreen.storyboard */; };
 		EF07303E22D28B2400973DE1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EF072F6722D28B2400973DE1 /* main.m */; };
@@ -94,18 +95,18 @@
 		EF07A20522D6186100D0D3FF /* JasonVisionService.m in Sources */ = {isa = PBXBuildFile; fileRef = EF07A1B222D6186100D0D3FF /* JasonVisionService.m */; };
 		EF07A20622D6186100D0D3FF /* JasonAgentService.m in Sources */ = {isa = PBXBuildFile; fileRef = EF07A1B522D6186100D0D3FF /* JasonAgentService.m */; };
 		EF82979B22D30A71003ED64B /* jr.sample.json in Resources */ = {isa = PBXBuildFile; fileRef = EF82979922D30A71003ED64B /* jr.sample.json */; };
-		F9283F33AA628489204A4867 /* Pods_Jasonette.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F0FCC971E030AF932E421D4 /* Pods_Jasonette.framework */; };
+		EF9781C322D9A0810024FDAE /* hello.json in Resources */ = {isa = PBXBuildFile; fileRef = EF9781C222D9A0810024FDAE /* hello.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1BD8E8486EE7AF4E4934685E /* Pods-Jasonette.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jasonette.release.xcconfig"; path = "Pods/Target Support Files/Pods-Jasonette/Pods-Jasonette.release.xcconfig"; sourceTree = "<group>"; };
-		2F0FCC971E030AF932E421D4 /* Pods_Jasonette.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jasonette.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E3176591D1E400C00D87778 /* Jasonette.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jasonette.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EE85B6B1DA45F8F0049EACE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		5EE85B7A1DA595A20049EACE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		BDE1A3D4D97BE5A73CB39B96 /* Pods_Jasonette.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jasonette.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEB1DF488FABA35A255BC8E4 /* Pods-Jasonette.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jasonette.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Jasonette/Pods-Jasonette.debug.xcconfig"; sourceTree = "<group>"; };
 		EF072F5F22D28B2400973DE1 /* settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = settings.plist; sourceTree = "<group>"; };
-		EF072F6022D28B2400973DE1 /* hello.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = hello.json; sourceTree = "<group>"; };
+		EF072F6022D28B2400973DE1 /* com.jasonelle.app.test.webview.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = com.jasonelle.app.test.webview.json; sourceTree = "<group>"; };
 		EF072F6222D28B2400973DE1 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		EF072F6322D28B2400973DE1 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EF072F6422D28B2400973DE1 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -253,6 +254,7 @@
 		EF07A1B622D6186100D0D3FF /* JasonAgentService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JasonAgentService.h; sourceTree = "<group>"; };
 		EF82979222D28D96003ED64B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Jasonette/Info.plist; sourceTree = SOURCE_ROOT; };
 		EF82979922D30A71003ED64B /* jr.sample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = jr.sample.json; sourceTree = "<group>"; };
+		EF9781C222D9A0810024FDAE /* hello.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = hello.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -261,7 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5EE85B6C1DA45F8F0049EACE /* MapKit.framework in Frameworks */,
-				F9283F33AA628489204A4867 /* Pods_Jasonette.framework in Frameworks */,
+				ACDAE25BCC06F4D2B1364277 /* Pods_Jasonette.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,16 +305,32 @@
 			children = (
 				5EE85B7A1DA595A20049EACE /* UIKit.framework */,
 				5EE85B6B1DA45F8F0049EACE /* MapKit.framework */,
-				2F0FCC971E030AF932E421D4 /* Pods_Jasonette.framework */,
+				BDE1A3D4D97BE5A73CB39B96 /* Pods_Jasonette.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EF05C12222DA5FE000602800 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				EF05C12322DA600000602800 /* WKWebView */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		EF05C12322DA600000602800 /* WKWebView */ = {
+			isa = PBXGroup;
+			children = (
+				EF072F6022D28B2400973DE1 /* com.jasonelle.app.test.webview.json */,
+			);
+			path = WKWebView;
 			sourceTree = "<group>";
 		};
 		EF072F5E22D28B2400973DE1 /* App */ = {
 			isa = PBXGroup;
 			children = (
 				EF072F5F22D28B2400973DE1 /* settings.plist */,
-				EF072F6022D28B2400973DE1 /* hello.json */,
+				EF9781C222D9A0810024FDAE /* hello.json */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -342,6 +360,7 @@
 		EF07A0E622D6186000D0D3FF /* Jasonette */ = {
 			isa = PBXGroup;
 			children = (
+				EF05C12222DA5FE000602800 /* Tests */,
 				EF07A0E722D6186000D0D3FF /* Core */,
 				EF07A13722D6186100D0D3FF /* Components */,
 				EF07A15822D6186100D0D3FF /* Actions */,
@@ -1048,7 +1067,7 @@
 				5E3176551D1E400C00D87778 /* Sources */,
 				5E3176561D1E400C00D87778 /* Frameworks */,
 				5E3176571D1E400C00D87778 /* Resources */,
-				63FB79939C3EFA5C13310B2B /* [CP] Embed Pods Frameworks */,
+				730C0CB152BB7DA792FDB1F5 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1112,7 +1131,7 @@
 				EF07A1D622D6186100D0D3FF /* preload.json in Resources */,
 				EF07A1CF22D6186100D0D3FF /* icon-success.png in Resources */,
 				EF07A1C622D6186100D0D3FF /* placeholder@2x.png in Resources */,
-				EF07303B22D28B2400973DE1 /* hello.json in Resources */,
+				EF07303B22D28B2400973DE1 /* com.jasonelle.app.test.webview.json in Resources */,
 				EF07A1D322D6186100D0D3FF /* csv.js in Resources */,
 				EF07A1D022D6186100D0D3FF /* st.js in Resources */,
 				EF07A20022D6186100D0D3FF /* JasonVerticalSectionItem.xib in Resources */,
@@ -1124,6 +1143,7 @@
 				EF07A1D122D6186100D0D3FF /* rss.js in Resources */,
 				EF07A1CC22D6186100D0D3FF /* Next@2x.png in Resources */,
 				EF07A1D422D6186100D0D3FF /* agent.js in Resources */,
+				EF9781C322D9A0810024FDAE /* hello.json in Resources */,
 				EF07A1C722D6186100D0D3FF /* placeholderr@2x.png in Resources */,
 				EF82979B22D30A71003ED64B /* jr.sample.json in Resources */,
 				EF07A1D222D6186100D0D3FF /* xhtml.js in Resources */,
@@ -1157,10 +1177,12 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		63FB79939C3EFA5C13310B2B /* [CP] Embed Pods Frameworks */ = {
+		730C0CB152BB7DA792FDB1F5 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Jasonette/Pods-Jasonette-frameworks.sh",
@@ -1205,6 +1227,8 @@
 				"${BUILT_PRODUCTS_DIR}/libPhoneNumber-iOS/libPhoneNumber_iOS.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFOAuth2Manager.framework",
@@ -1363,7 +1387,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1404,7 +1428,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1426,6 +1450,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Jasonette/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_CFLAGS = (
 					"$(inherited)",
@@ -1529,6 +1554,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Jasonette/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jasonette.seed;
 				PRODUCT_NAME = "$(TARGET_NAME)";

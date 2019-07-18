@@ -323,6 +323,10 @@
                [req setURL:[NSURL URLWithString:responseObject[@"$jason"]]];
 
                NSURLSessionDataTask * upload_task = [manager  dataTaskWithRequest:req
+                                                            uploadProgress:^(NSProgress * _Nonnull uploadProgress) {
+               }
+                                                          downloadProgress:^(NSProgress * _Nonnull downloadProgress) {
+               }
                                                          completionHandler:^(NSURLResponse * _Nonnull response, id _Nullable responseObject, NSError * _Nullable error) {
                                                              if (!error) {
                                                              dispatch_async (dispatch_get_main_queue (), ^{
@@ -337,6 +341,7 @@
                                                              });
                                                              }
                }];
+
                [upload_task resume];
            }
            failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

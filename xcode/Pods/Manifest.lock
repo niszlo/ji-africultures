@@ -17,23 +17,29 @@ PODS:
   - AFOAuth2Manager (3.0.0):
     - AFNetworking/NSURLSession (~> 3.0)
   - AHKActionSheet (0.5.4)
-  - APAddressBook (0.2.3):
-    - APAddressBook/Core (= 0.2.3)
-  - APAddressBook/Core (0.2.3)
+  - APAddressBook (0.3.2):
+    - APAddressBook/Core (= 0.3.2)
+  - APAddressBook/Core (0.3.2)
   - BBBadgeBarButtonItem (1.2)
   - CYRTextView (0.4.0)
   - DAKeyboardControl (2.4.0)
   - DHSmartScreenshot (1.3.1)
-  - DTCoreText (1.6.17):
+  - DTCoreText (1.6.22):
+    - DTCoreText/Core (= 1.6.22)
     - DTFoundation/Core (~> 1.7.5)
     - DTFoundation/DTAnimatedGIF (~> 1.7.5)
     - DTFoundation/DTHTMLParser (~> 1.7.5)
     - DTFoundation/UIKit (~> 1.7.5)
-  - DTFoundation/Core (1.7.10)
-  - DTFoundation/DTAnimatedGIF (1.7.10)
-  - DTFoundation/DTHTMLParser (1.7.10):
+  - DTCoreText/Core (1.6.22):
+    - DTFoundation/Core (~> 1.7.5)
+    - DTFoundation/DTAnimatedGIF (~> 1.7.5)
+    - DTFoundation/DTHTMLParser (~> 1.7.5)
+    - DTFoundation/UIKit (~> 1.7.5)
+  - DTFoundation/Core (1.7.13)
+  - DTFoundation/DTAnimatedGIF (1.7.13)
+  - DTFoundation/DTHTMLParser (1.7.13):
     - DTFoundation/Core
-  - DTFoundation/UIKit (1.7.10):
+  - DTFoundation/UIKit (1.7.13):
     - DTFoundation/Core
   - FLEX (2.4.0)
   - FreeStreamer (3.5.7):
@@ -42,12 +48,12 @@ PODS:
   - INTULocationManager (4.2.0)
   - IQAudioRecorderController (1.2.3):
     - SCSiriWaveformView
-  - JDStatusBarNotification (1.5.3)
+  - JDStatusBarNotification (1.6.0)
   - JSCoreBom (1.1.1)
-  - libPhoneNumber-iOS (0.8.13)
-  - MBProgressHUD (1.0.0)
-  - NSGIF (1.2)
-  - NSHash (1.1.0)
+  - libPhoneNumber-iOS (0.9.15)
+  - MBProgressHUD (1.1.0)
+  - NSGIF (1.2.4)
+  - NSHash (1.2.0)
   - OMGHTTPURLRQ/UserAgent (3.1.2)
   - PHFComposeBarView (2.0.2):
     - PHFDelegateChain (~> 1.0)
@@ -57,7 +63,7 @@ PODS:
   - RMActionController (1.0.5)
   - RMDateSelectionViewController (2.0.3):
     - RMActionController (~> 1.0.5)
-  - SBJson (4.0.2)
+  - SBJson (5.0.0)
   - SCSiriWaveformView (1.1.1)
   - SDWebImage (3.8.1):
     - SDWebImage/Core (= 3.8.1)
@@ -96,7 +102,7 @@ DEPENDENCIES:
   - PHFComposeBarView
   - REMenu
   - RMDateSelectionViewController
-  - SBJson (~> 4.0.2)
+  - SBJson (~> 5.0.0)
   - SDWebImage (from `https://github.com/rs/SDWebImage.git`, tag `3.8.1`)
   - SocketRocket
   - SWFrameButton
@@ -170,24 +176,24 @@ SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   AFOAuth2Manager: 0566da1be64883e339813d411229fdc9a84dab7c
   AHKActionSheet: f0b312b5c689f72924d231c39dae140ecd5c1d46
-  APAddressBook: 2a91bf05999548bea210ec9d1a68073f4dc8bfce
+  APAddressBook: e68ecaf95f2c323b625ae585a0d25fe505291286
   BBBadgeBarButtonItem: c2fbca0bff18e21b70defc9438a8a5048008e7ca
   CYRTextView: 1c1a4d708eee54ecad66b8ad42dbfe73083bdfce
   DAKeyboardControl: 9d9bca22a5cc3c1d3cc61e24fbd208c3e84a3d2d
   DHSmartScreenshot: ee749048bd7126c4826748f98df3a4adc6ad6c78
-  DTCoreText: 3ea8bba23dd2141ba18adb227a7dd33a822df1c4
-  DTFoundation: 3b6b1b817d2a7fb02e7eaf2596c922a68145bd43
+  DTCoreText: ad5135357a0e792f735970ed67d3ecda8b602d3d
+  DTFoundation: f03be9fd786f11e505bb8fc44e2a3732bf0917df
   FLEX: bd1a39e55b56bb413b6f1b34b3c10a0dc44ef079
   FreeStreamer: c11b83e4e4010c00d1e1549a37d6719e98252c45
   HMSegmentedControl: 83b9686022d2176fb6457d2bdb61e5d6393fed7d
   INTULocationManager: 73f8254b3d05c897c56bb13c190e5b7c648c0998
   IQAudioRecorderController: 69a67c2e0b87bd8746cbb4de175fd7a0bf820009
-  JDStatusBarNotification: 29413865af11c862c17180610b0f46a21118b412
+  JDStatusBarNotification: 21b616e7432284fea6eb0ce9eadc37c8038a5544
   JSCoreBom: 712590b897ecd74d9fa9cb0f16857491411c932b
-  libPhoneNumber-iOS: 3a37004baf779b4262ab29a31a87d2ae668159d4
-  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
-  NSGIF: 73b435330174a9d04db9886a232c605a3e8139b5
-  NSHash: 61d598c6d48957c5557f1eef0aeafd6ef5ec5fb7
+  libPhoneNumber-iOS: 0a32a9525cf8744fe02c5206eb30d571e38f7d75
+  MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
+  NSGIF: 442808fd1667ebac3d09046c3f6d4bdd6720cded
+  NSHash: 036c03781d372c288d332b512b203e7bb832e46e
   OMGHTTPURLRQ: 38316b56d88125c600bcdb16df8329147da2b0ee
   PHFComposeBarView: 758c73ce54be681df97223bc61543dd8828ae0d3
   PHFDelegateChain: 491f9cd8a3fb8761f390ff05f74a0e168d48d285
@@ -195,7 +201,7 @@ SPEC CHECKSUMS:
   REMenu: 30dad195930adf6c5eeb8041e3257aa60bf9fa49
   RMActionController: b83653e7452ed51492094d65dc82151c36443c03
   RMDateSelectionViewController: 354a0f1fe40bac01054528b7a8735f2973bbd813
-  SBJson: 16404e557ff6346b506e9e12f2d83e6782f37f6f
+  SBJson: 73c848dc34be51fda282fab12bda6c426f5ead08
   SCSiriWaveformView: 15b9dd6f94c7536e2032b34a35c6ff74d38c7411
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
@@ -207,6 +213,6 @@ SPEC CHECKSUMS:
   TWMessageBarManager: fd84e7948ba7968a2b5d9454859135761214ec56
   UICKeyChainStore: 85db518bb1d294366d15ec9b92a416c4e670518f
 
-PODFILE CHECKSUM: dd6dfa0550722a90e555288182c42d0db82c1c81
+PODFILE CHECKSUM: cc9d5915131bb1914673ec7a2df3c02b502352fc
 
 COCOAPODS: 1.5.3

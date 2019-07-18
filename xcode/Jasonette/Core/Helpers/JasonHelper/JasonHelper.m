@@ -374,11 +374,10 @@
      * return @"";
      */
 
-#pragma message "TODO: Update SBJson4Writer Lib"
-    SBJson4Writer * writer = [[SBJson4Writer alloc] init];
-//    writer.humanReadable = YES;
-    writer.humanReadable = NO;
-    writer.sortKeys = YES;
+    SBJson5Writer * writer = [SBJson5Writer
+                              writerWithMaxDepth:0
+                                   humanReadable:NO
+                                        sortKeys:YES];
     @try {
         NSString * ret = [writer stringWithObject:value];
 
@@ -388,6 +387,7 @@
             return [value description];
         }
     } @catch (NSException * exception) {
+        DTLogWarning (@"%@", exception);
         return [value description];
     }
 }
