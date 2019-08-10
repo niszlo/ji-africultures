@@ -1,65 +1,70 @@
 platform :ios, '9.0'
-inhibit_all_warnings!
+#inhibit_all_warnings!
 use_frameworks!
 
 target 'Jasonette' do
 
   # System
-  pod 'UICKeyChainStore'
-  pod 'libPhoneNumber-iOS'
-  pod 'DTCoreText'
-  pod 'JSCoreBom', '~> 1.1.1'
-  pod 'SBJson', '~> 5.0.0'
-  pod 'FLEX', '~> 2.0', :configurations => ['Debug']
-
+  pod 'UICKeyChainStore', :git => 'https://github.com/jasonelle/ios-pod-uickeychainstore.git', :branch => 'jasonelle'
+  pod 'libPhoneNumber-iOS', :git => 'https://github.com/jasonelle/ios-pod-libphonenumber.git', :branch => 'jasonelle'
+  pod 'DTFoundation', :git => 'https://github.com/jasonelle/ios-pod-dtfoundation.git', :branch => 'jasonelle'
+  pod 'DTCoreText', :git => 'https://github.com/jasonelle/ios-pod-dtcoretext.git', :branch => 'jasonelle'
+  pod 'JSCoreBom', :git => 'https://github.com/jasonelle/ios-pod-jscorebom.git', :branch => 'jasonelle'
+  pod 'SBJson', :git => 'https://github.com/jasonelle/ios-pod-sbjson.git', :branch => 'jasonelle'
+  pod 'FLEX', :git => 'https://github.com/jasonelle/ios-pod-flex.git', :tag => '3.0.0', :configurations => ['Debug'] #,:branch => 'jasonelle'
+  pod 'NSHash', :git => 'https://github.com/jasonelle/ios-pod-nshash.git', :branch => 'jasonelle'
+  
+  ## TODO: Remove this dependency
+  ## change it to Contacts native api
+  ## https://github.com/Alterplay/APAddressBook/issues/138
+  pod 'APAddressBook', :git => 'https://github.com/jasonelle/ios-pod-apaddressbook.git', :branch => 'jasonelle'
+  
   # Networking
-  pod 'SocketRocket'
-  pod 'AFNetworking'
+  pod 'OMGHTTPURLRQ', :git => 'https://github.com/jasonelle/ios-pod-omghttpurlrq.git', :branch => 'jasonelle'
+  pod 'Reachability', :git => 'https://github.com/jasonelle/ios-pod-reachability.git', :branch => 'jasonelle'
+  pod 'SocketRocket', :git => 'https://github.com/jasonelle/ios-pod-socketrocket.git', :branch => 'jasonelle'
+  pod 'AFNetworking', :git => 'https://github.com/jasonelle/ios-pod-afnetworking.git', :branch => 'jasonelle'
   pod 'TDOAuth'
-  pod "AFOAuth2Manager"
+  pod 'AFOAuth2Manager'
 
+  ## TODO: Update to latest version
+  pod 'SDWebImage', :git => 'https://github.com/jasonelle/ios-pod-sdwebimage.git', :tag => '3.8.1', :inhibit_warnings => true
+  
   # Audio
   pod 'IQAudioRecorderController'
-  pod 'FreeStreamer', :git => "https://github.com/muhku/FreeStreamer.git"
+  pod 'FreeStreamer', :git => 'https://github.com/jasonelle/ios-pod-freestreamer.git', :branch => 'jasonelle'
   
   # Views
   pod 'MBProgressHUD', '~> 1.0'
   
-  pod 'TWMessageBarManager'
+  pod 'TWMessageBarManager', :git => 'https://github.com/jasonelle/ios-pod-twmessagebarmanager.git', :branch => 'jasonelle'
   
-  pod 'SWTableViewCell', :git => "https://github.com/gliechtenstein/SWTableViewCell.git"
+  pod 'SWTableViewCell', :git => 'https://github.com/jasonelle/ios-pod-swtableviewcell.git', :branch => 'jasonelle'
 
-  # TODO: Remove this dependency
-  # change it to Contacts native api
-  # https://github.com/Alterplay/APAddressBook/issues/138
-  pod 'APAddressBook'
   
-  
-  pod 'TTTAttributedLabel'
+  pod 'TTTAttributedLabel', :git => 'https://github.com/jasonelle/ios-pod-tttattributedlabel.git', :branch => 'jasonelle'
   pod 'BBBadgeBarButtonItem'
   
-  pod 'REMenu'
+  pod 'REMenu', :git => 'https://github.com/jasonelle/ios-pod-remenu.git', :branch => 'jasonelle'
   pod 'JDStatusBarNotification' # $util.toast
-  pod 'HMSegmentedControl'
-  pod "SWFrameButton"
+  pod 'HMSegmentedControl', :git => 'https://github.com/jasonelle/ios-pod-hmsegmentedcontrol.git', :branch => 'jasonelle'
+  pod 'SWFrameButton'
   
-  pod "NSGIF", "~> 1.0"
+  pod 'NSGIF', '~> 1.0'
   pod 'INTULocationManager'
-  pod "AHKActionSheet"
+  pod 'AHKActionSheet'
   
-  pod "CYRTextView"
+  pod 'CYRTextView', :git => 'https://github.com/jasonelle/ios-pod-cyrtextview.git', :branch => 'jasonelle'
   
-  pod 'SDWebImage', :git => "https://github.com/rs/SDWebImage.git", :tag => '3.8.1'
   pod 'SZTextView'
   
   pod 'DHSmartScreenshot'
-  pod 'NSHash'
   
-  pod "RMDateSelectionViewController"
+  pod 'RMDateSelectionViewController'
   
   pod 'PHFComposeBarView'
   pod 'DAKeyboardControl'
-  
+
   #pod 'GoogleMobileAds', '~> 7.8'
 
   post_install do |installer|

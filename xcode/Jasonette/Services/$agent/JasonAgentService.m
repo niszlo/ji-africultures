@@ -57,6 +57,8 @@
             event[@"options"] = m[@"data"];
         }
 
+        DTLogDebug (@"Triggering %@", event);
+
         [[Jason client] call:event];
         // 2. Make an agent request
     } else if (message.body[@"request"]) {
@@ -73,6 +75,9 @@
                     @"id": identifier,
                     @"nonce": m[@"nonce"]
             };
+
+            DTLogDebug (@"Requesting %@", event);
+
             [self request:event];
         }
 
@@ -80,6 +85,8 @@
     } else if (message.body[@"response"]) {
         NSDictionary * m = message.body[@"response"];
         NSDictionary * source = message.webView.payload[@"$source"];
+
+        DTLogDebug (@"Got Response %@", message.body[@"response"]);
 
         // $source exists => the original request was from an agent
         if (source) {
@@ -105,6 +112,7 @@
 
         // 4. Tell Jasonette to make an href transition to another view
     } else if (message.body[@"href"]) {
+        DTLogDebug (@"Loading Href %@", message.body[@"href"][@"data"]);
         [[Jason client] go:message.body[@"href"][@"data"]];
     }
 }
@@ -392,7 +400,19 @@
     [controller addScriptMessageHandler:self name:identifier];
     config.userContentController = controller;
     [config setAllowsInlineMediaPlayback:YES];
-    [config setMediaTypesRequiringUserActionForPlayback:WKAudiovisualMediaTypeNone];
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+
+    if ([config respondsToSelector:@selector(setMediaPlaybackRequiresUserAction:)]) {
+        [config setMediaPlaybackRequiresUserAction:NO];
+    }
+
+#pragma clang diagnostic pop
+
+    if (@available(iOS 10, *)) {
+        [config setMediaTypesRequiringUserActionForPlayback:WKAudiovisualMediaTypeNone];
+    }
 
     WKWebView * agent;
     JasonViewController * vc = (JasonViewController *)[[Jason client] getVC];
@@ -463,8 +483,8 @@
     if (agent) {
         NSArray * items = options[@"items"];
         dispatch_group_t requireGroup = dispatch_group_create ();
-        NSMutableArray * codes = [[NSMutableArray alloc] init];
-        NSMutableArray * errors = [[NSMutableArray alloc] init];
+        NSMutableArray * codes = [@[] mutableCopy];
+        NSMutableArray * errors = [@[] mutableCopy];
 
         if (items && items.count > 0) {
             for (int i = 0; i < items.count; i++) {
@@ -492,11 +512,11 @@
 
                         manager.responseSerializer.acceptableContentTypes = [NSSet
                                                                              setWithObjects:@"text/javascript", @"text/plain", @"application/javascript", nil];
-
                         [manager   GET:inject_url
                             parameters:nil
+                               headers:nil
                               progress:^(NSProgress * _Nonnull downloadProgress) {
-                                  // Nothing
+                                  // Omit
                               }
                                success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
                                    NSString * code = [JasonHelper UTF8StringFromData:((NSData *)responseObject)];
@@ -504,6 +524,7 @@
                                    dispatch_group_leave (requireGroup);
                                }
                                failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                   DTLogError (@"%@", error);
                                    [errors addObject:@"Failed to fetch script"];
                                    dispatch_group_leave (requireGroup);
                                }];

@@ -42,6 +42,8 @@ that triggers when the orientation changes.
 
 - Improved Code Organization.
 
+- Improved Networking Code.
+
 ### Fixed
 
 - Fixed Crash on parsing local json files with wrong syntax.
@@ -55,6 +57,8 @@ that triggers when the orientation changes.
 - Fixed Blank Screen if you click a `Tab Item` more than once.
 
 - Fixed `WKWebView` orientation change not working. Based on the code by `@ricardojlpinto`.
+
+- Fixed Crash when using`$vision` on simulator.
 
 ### Updated
 
@@ -81,6 +85,20 @@ that triggers when the orientation changes.
 - Updated to `DTCoreText` 1.6.22 (was 1.6.17).
 
 - Updated to `DTFoundation` 1.7.13 (was 1.7.10).
+
+- Updated to `FreeStreamer` 4.0.0 (was 3.5.7).
+
+- Updated to `JSCoreBom` 1.1.2 (was 1.1.1).
+
+- Updated to `OMGHTTPURLRQ` 3.2.4 (was 3.1.2).
+
+- Updated to `FLEX 3.0.0` (was 2.4.0).
+
+- Updated to `CYRTextView` 0.4.1 (was 0.4.0).
+
+- Updated to `HMSegmentedControl` 1.5.5 (was 1.5.2).
+
+- Updated to `INTULocationManager` 4.3.2 (was 4.2.0).
 
 ### Removed
 
