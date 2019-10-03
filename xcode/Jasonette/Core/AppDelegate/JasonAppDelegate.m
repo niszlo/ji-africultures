@@ -32,7 +32,7 @@ static NSArray * _services;
     DTLogInfo (@"Loading jr.json files");
     NSArray * jrs = [dirFiles filteredArrayUsingPredicate:
                      [NSPredicate
-                      predicateWithFormat:@"(self ENDSWITH[c] '.json') AND (self BEGINSWITH[c] '$')"]];
+                      predicateWithFormat:@"(self ENDSWITH[c] '.json') AND (self BEGINSWITH[c] 'jr')"]];
 
     if (jrs.count <= 0) {
         DTLogInfo (@"No extensions found with jr.json");
@@ -112,6 +112,9 @@ static NSArray * _services;
         DTLogInfo (@"Adding Class %@ to the Stack", className);
         extension = [[ActionClass alloc] init];
         [Jason client].services[className] = extension;
+
+        // Standarize naming to ease fetching later
+        [Jason client].services[[className lowercaseString]] = extension;
     }
 
     SEL initialize = NSSelectorFromString (@"initialize:");

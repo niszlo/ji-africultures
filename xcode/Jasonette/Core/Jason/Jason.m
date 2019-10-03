@@ -228,7 +228,7 @@
 
         if (href[@"loading"]) {
             vc.loading = href[@"loading"];
-            DTLogDebug (@"With Loading %@", vc.loading);
+            DTLogDebug (@"Is Loading? %d", vc.loading);
         }
     }
 
@@ -1956,8 +1956,18 @@
             @"language": [[NSLocale preferredLanguages] objectAtIndex:0]
     };
 
+    NSURLComponents * components = [NSURLComponents componentsWithString:self->VC.url];
+    NSMutableDictionary * params = [@{} mutableCopy];
+
+    if (components.queryItems) {
+        for (NSURLQueryItem * item in components.queryItems) {
+            params[item.name] = item.value;
+        }
+    }
+
     dict[@"view"] = @{
-            @"url": self->VC.url
+            @"url": self->VC.url,
+            @"params": params
     };
 
     return dict;
