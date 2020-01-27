@@ -178,10 +178,43 @@
 
     JasonAppDelegate * app = (JasonAppDelegate *)[[UIApplication sharedApplication] delegate];
     NSDictionary * plist = [self getSettings];
+    BOOL appendNonce = [plist[@"append_nonce_to_url"] boolValue];
+    
+    DTLogDebug((appendNonce ? @"Nonce Activated" : @"Nonce Inactive"));
+    
     ROOT_URL = plist[@"url"];
+    NSURLComponents * components = [[NSURLComponents alloc]
+                                    initWithURL:[NSURL URLWithString:ROOT_URL]
+                                    resolvingAgainstBaseURL:NO];
+    
+    if(appendNonce && components) {
+        
+        if(![components.scheme isEqualToString:@"file"]) {
+            
+            DTLogDebug(@"Adding Nonce");
+            
+            NSURLQueryItem * nonce = [[NSURLQueryItem alloc]
+                                      initWithName:@"jasonnonce" value:[NSString
+                                                                        stringWithFormat:@"%u%f",
+                                                                        arc4random_uniform(10000) + 1,
+                                                                        CFAbsoluteTimeGetCurrent()]];
+            
+            NSMutableArray * items = [NSMutableArray
+                                      arrayWithCapacity:[components.queryItems count] + 1];
+            [items addObject:nonce];
+            
+            [components setQueryItems: items];
+            
+            ROOT_URL = [components.URL absoluteString];
+            
+        } else {
+            DTLogDebug(@"file:// scheme used. nonce not added.");
+        }
+    }
+    
     DTLogDebug (@"Root Url %@", ROOT_URL);
 
-    if (!ROOT_URL || [ROOT_URL isEqualToString:@""]) {
+    if (!ROOT_URL || [ROOT_URL isEqualToString:@""] || !components) {
         DTLogError (@"Url not found in settings.plist");
         DTLogInfo (@"Loading error.json");
         ROOT_URL = @"file://error.json";
