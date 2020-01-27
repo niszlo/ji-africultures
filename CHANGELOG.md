@@ -4,9 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Sentimental Versioning](http://sentimentalversioning.org/).
 
-## [2.0.0] Next Release
+## [3.0.0] Next Release
 
-This version is the current in development. Will be released after the week of *6th November 2019*.
+This version is the current in development. Will be released after the week of *6th November 2020*.
+
+## [2.0.0](https://github.com/jasonelle/jasonelle/releases/tag/v2.0)
+
+This version was released in November 2019.
 
 ### Added
 
@@ -37,6 +41,8 @@ Example `https://example.com?param1=1&params2=true`. Will show `param1` and `par
 
 - Added `$agent.logger` to `agent.js` that can call the system logger.
 Methods: `$agent.logger.log`, `$agent.logger.debug`, `$agent.logger.info`, `$agent.logger.warn`, `$agent.logger.error`. As replacements of `console.log` methods for webviews. 
+
+- Added optional `nonce` to url in `settings.plist`. Now is easier to invalidate server cache if needed.
 
 ### Changed
 
@@ -136,6 +142,10 @@ Huge thanks to the following persons that helped in this release:
 - `John Mark`: Wrote a great tutorial in Bubble.is forums.
 
 - [Devs Chile](https://devschile.cl): Chilean commmunity of developers.
+
+- `Phillip`: Suggested the `nonce` addition.
+
+More people here [https://jasonelle.com/docs/#/folks](https://jasonelle.com/docs/#/folks).
 
 ## [1.0](https://github.com/jasonelle/jasonelle/releases/tag/v1.0)
 
