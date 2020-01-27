@@ -33,22 +33,7 @@ Documentation and examples in the [documentation repository](https://github.com/
 
 Follow or join these channels for questions and support, and to keep updated on latest releases and announcements.
 
-<table class="equalwidth follow">
-<tr>
-<td>
-
-<a href="https://jasonette.now.sh">
-
-<img src="https://user-images.githubusercontent.com/292738/59078494-65ca7e80-88ad-11e9-8c87-4f3fa002bbb9.png" alt="Slack Logo">
-
-<br>
-
-<img src="https://jasonette.now.sh/badge.svg" alt="Slack User Count">
-
-</a>
-</td>
-</tr>
-</table>
+[Telegram Group](https://t.me/jasonelle)
 
 
 ## [License](LICENSE)
