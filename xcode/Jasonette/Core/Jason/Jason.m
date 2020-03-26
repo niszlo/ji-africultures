@@ -3690,6 +3690,7 @@
 
             if (self->VC.tabNeedsRefresh) {
                 DTLogDebug (@"Tab %ld Needs Refresh", indexOfTab);
+                self->VC.url = href;
                 [[Jason client] call:@{ @"type": @"$reload" }];
                 return YES;
                 /* This code contains the logic to refresh.
