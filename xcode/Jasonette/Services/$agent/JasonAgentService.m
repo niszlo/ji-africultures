@@ -307,10 +307,21 @@
                 }
             } else {
                 // Remote URL
-                DTLogDebug (@"Loading Remote URL %@", url);
+                DTLogDebug (@"Loading Remote URL %@ With Options %@", url, options);
                 NSURL * nsurl = [NSURL URLWithString:url];
-                NSURLRequest * nsrequest = [NSURLRequest requestWithURL:nsurl];
+                NSMutableURLRequest * nsrequest = [[NSURLRequest requestWithURL:nsurl] mutableCopy];
 
+                NSDictionary * innerOptions = options[@"options"];
+                if(innerOptions) {
+                    NSDictionary * headers = innerOptions[@"header"];
+                    if(!headers) {
+                        headers = innerOptions[@"headers"];
+                    }
+                    for(NSString * key in headers) {
+                        DTLogDebug(@"Using Header %@ : %@", key, headers[key], nsrequest.URL);
+                        [nsrequest addValue:headers[key] forHTTPHeaderField:key];
+                    }
+                }
                 if (shouldReload) {
                     [agent loadRequest:nsrequest];
                 }
@@ -361,6 +372,7 @@
             new_options[@"text"] = agent.payload[@"text"];
             new_options[@"url"] = agent.payload[@"url"];
             new_options[@"action"] = agent.payload[@"action"];
+            new_options[@"options"] = agent.payload[@"options"];
             [self refresh:agent withOptions:new_options];
             [[Jason client] success];
         } else {

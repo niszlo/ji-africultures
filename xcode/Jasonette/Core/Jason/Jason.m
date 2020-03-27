@@ -2541,6 +2541,10 @@
                 payload[@"com.jasonelle.state:stop-reloading"] = @YES;
             }
 
+            if(bg[@"options"]) {
+                payload[@"options"] = bg[@"options"];
+            }
+
             DTLogDebug (@"Loading Background with Payload %@", payload);
 
 #pragma message "JasonAgentService Setup"
