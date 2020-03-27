@@ -3386,7 +3386,7 @@
             }
         }
 
-        if (badge[@"text"]) {
+        if (badge[@"text"] && ![[badge[@"text"] description] isEqualToString:@""]) {
             barButton.badgeValue = [badge[@"text"] description];
         } else {
             barButton.badgeValue = @" ";
@@ -3793,7 +3793,7 @@
         [item setTitlePositionAdjustment:UIOffsetMake (0.0, -18.0)];
     }
 
-    if (tab[@"badge"]) {
+    if (tab[@"badge"] && ![[tab[@"badge"] description] isEqualToString:@""]) {
         [item setBadgeValue:[tab[@"badge"] description]];
     }
 }
