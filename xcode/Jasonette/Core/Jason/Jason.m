@@ -3690,8 +3690,11 @@
 
             if (self->VC.tabNeedsRefresh) {
                 DTLogDebug (@"Tab %ld Needs Refresh", indexOfTab);
+                [((UINavigationController *) viewController) popToRootViewControllerAnimated:NO];
+                self->VC = ((UINavigationController *) viewController).viewControllers.lastObject;
                 self->VC.url = href;
-                [[Jason client] call:@{ @"type": @"$reload" }];
+                [self->VC reload: nil final:NO];
+                 [[Jason client] call:@{ @"type": @"$render" }];
                 return YES;
                 /* This code contains the logic to refresh.
                  * the problem is that refreshing more than one time
