@@ -17,7 +17,7 @@
      Using NSJSONReadingAllowFragments enables parsing JSON files that are just
      a number or string. Accepted JSON can now start with {}, [], "", 0-9.
      */
-    AFJSONResponseSerializer * serializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+    AFJSONResponseSerializer * serializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingFragmentsAllowed];
     
     id responseObject = [serializer responseObjectForResponse:response data:data error:errorPointer];
 
