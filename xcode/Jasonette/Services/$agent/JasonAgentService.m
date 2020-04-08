@@ -147,7 +147,11 @@
                             stringWithFormat:@"$agent.interface = window.webkit.messageHandlers[\"%@\"];\n",
                             identifier];
 
-    NSString * summon = [raw stringByAppendingString:interface];
+    DTLogDebug (@"Injecting custom.js into context %@", identifier);
+    NSString * custom = [JasonHelper read_local_file:@"file://custom.js"];
+    NSString * summon = [[raw
+                          stringByAppendingString:interface]
+                            stringByAppendingString:custom];
 
     webView.payload[@"state"] = @"rendered";
 
