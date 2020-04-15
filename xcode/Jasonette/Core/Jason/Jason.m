@@ -1985,7 +1985,15 @@
     dict[@"device"] = @{
             @"width": @(bounds.size.width),
             @"height": @(bounds.size.height),
-            @"os": @{ @"name": @"ios", @"version": [[UIDevice currentDevice] systemVersion] },
+            @"os": @{
+                    @"name": [[[UIDevice currentDevice] systemName] lowercaseString],
+                    @"version": [[UIDevice currentDevice] systemVersion]
+            },
+            @"name": [[UIDevice currentDevice] name],
+            @"model": @{
+                    @"name": [[UIDevice currentDevice] model],
+                    @"localized": [[UIDevice currentDevice] localizedModel]
+            },
             @"language": [[NSLocale preferredLanguages] objectAtIndex:0]
     };
 
