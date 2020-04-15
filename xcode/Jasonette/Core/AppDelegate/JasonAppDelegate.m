@@ -317,20 +317,30 @@ static NSArray * _services;
 + (void)                                 application:(UIApplication *)application
     didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    NSString * device_token = [[NSString alloc]initWithFormat:@"%@",
-                               [[[deviceToken description]
-                                 stringByTrimmingCharactersInSet:[NSCharacterSet
-                                                                  characterSetWithCharactersInString:@"<>"]]
-                                stringByReplacingOccurrencesOfString:@" "
-                                                          withString:@""]];
+    // Device token can be have variable length.
+    // Also using [deviceToken description] is not a good practice (description can change in the future)
+    // Solution based on this answer https://stackoverflow.com/a/16411517
+    
+    const char * data = [deviceToken bytes];
+    NSMutableString * token = [@"" mutableCopy];
+    NSMutableString * tokenLowerCase = [@"" mutableCopy];
 
-    DTLogInfo (@"Got Device Token");
-    DTLogDebug (@"Got Device Token %@", device_token);
+    for (NSUInteger i = 0; i < deviceToken.length; i++) {
+        [token appendFormat:@"%02.2hhX", data[i]];
+        [tokenLowerCase appendFormat:@"%02.2hhx", data[i]];
+    }
+    
+    NSDictionary * params = @{
+                @"token": token,
+                @"tokenlower": tokenLowerCase
+    };
+    
+    DTLogDebug (@"Got Device Token %@ %@", params, deviceToken);
 
     [[NSNotificationCenter defaultCenter]
      postNotificationName:@"onRemoteNotificationDeviceRegistered"
                    object:nil
-                 userInfo:@{ @"token": device_token }];
+     userInfo:params];
 }
 
 + (void)             application:(UIApplication *)application

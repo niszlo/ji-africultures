@@ -66,15 +66,19 @@
     [self process:notification.userInfo];
 }
 
+/* 
+    This event is triggered in
++ (void) application:(UIApplication *)application
+    didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken;
+    Present in JasonAppDelegate.m
+*/
 - (void)onRemoteNotificationDeviceRegistered:(NSNotification *)notification {
     NSDictionary * payload = notification.userInfo;
     NSDictionary * events = [[[Jason client] getVC] valueForKey:@"events"];
 
     if (events) {
         if (events[@"$push.onregister"]) {
-            NSDictionary * params = @{ @"$jason":
-                                       @{ @"token":
-                                          payload[@"token"] } };
+            NSDictionary * params = @{ @"$jason": payload};
 
             DTLogDebug (@"Calling $push.onregister event with params %@", params);
 
