@@ -1045,7 +1045,11 @@
     JasonViewController * weakSelf = self;
 
     dispatch_async (dispatch_get_global_queue (DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        NSArray * keys = [body allKeys];
+        DTLogDebug(@"Body %@", body);
+        NSArray * keys = @[];
+        if([body respondsToSelector:@selector(allKeys)]) {
+            keys = [body allKeys];
+        }
 
         for (NSString * key in keys) {
             if ([body[key] isKindOfClass:[NSArray class]]) {
