@@ -4800,7 +4800,11 @@
     [JasonMemory client].locked = NO;
     [JasonMemory client].executing = NO;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"finishRefreshing" object:nil];
-    VC.view.userInteractionEnabled = YES;
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self->VC.view.userInteractionEnabled = YES;
+    });
+
     [[NSNotificationCenter defaultCenter] postNotificationName:@"unlock" object:nil];
 
     // In case oauth was in process, set it back to No
@@ -4824,7 +4828,7 @@
     if (self->VC.original && self->VC.rendered && self->VC.original[@"$jason"][@"head"][@"offline"]) {
         DTLogInfo (@"Offline Mode Activated");
 
-        if (![[VC.rendered description] containsString:@"{{"] && ![[self.options description] containsString:@"}}"]) {
+        if (![[self->VC.rendered description] containsString:@"{{"] && ![[self.options description] containsString:@"}}"]) {
             dispatch_async (dispatch_get_global_queue (DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                 NSString * normalized_url = [JasonHelper normalized_url:self->VC.url forOptions:self->VC.options];
                 normalized_url = [normalized_url stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
