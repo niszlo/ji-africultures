@@ -1983,6 +1983,7 @@
 
     CGRect bounds = [[UIScreen mainScreen] bounds];
     dict[@"device"] = @{
+            @"uuid": [[[UIDevice currentDevice] identifierForVendor] UUIDString],
             @"width": @(bounds.size.width),
             @"height": @(bounds.size.height),
             @"os": @{
