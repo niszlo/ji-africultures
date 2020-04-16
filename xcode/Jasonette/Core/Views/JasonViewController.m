@@ -1044,6 +1044,7 @@
 - (void)loadAssets:(NSDictionary *)body {
     JasonViewController * weakSelf = self;
 
+    DTLogDebug(@"Load Assets");
     dispatch_async (dispatch_get_global_queue (DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         DTLogDebug(@"Body %@", body);
         NSArray * keys = @[];
@@ -1595,8 +1596,17 @@
     }
 
     for (NSDictionary * section in self.sections) {
-        NSMutableDictionary * header = section[@"header"];
-        NSNumber * rowcount_for_section = [NSNumber numberWithLong:[section[@"items"] count]];
+        NSMutableDictionary * header = [@{} mutableCopy];
+        NSArray * items = @[];
+        if([section respondsToSelector:@selector(objectForKey:)]){
+            if(section[@"header"]){
+                header = section[@"header"];
+            }
+            if(section[@"items"] && [section[@"items"] respondsToSelector:@selector(count)]){
+                items = section[@"items"];
+            }
+        };
+        NSNumber * rowcount_for_section = [NSNumber numberWithLong:[items count]];
         [rowcount addObject:rowcount_for_section];
         total_rowcount = total_rowcount + [rowcount_for_section longValue];
 
@@ -1604,7 +1614,7 @@
             // No header
             [headers addObject:@{}];
         } else {
-            [headers addObject:section[@"header"]];
+            [headers addObject:header];
         }
     }
 
