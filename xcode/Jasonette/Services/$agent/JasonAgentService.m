@@ -603,12 +603,14 @@
 }
 
 - (void)inject:(NSString *)code into:(WKWebView *)agent {
-    [agent evaluateJavaScript:code
-            completionHandler:^(id _Nullable res, NSError * _Nullable error) {
-                // Step 2. Execute the method with params
-                DTLogDebug (@"Injected code into agent");
-                [[Jason client] success];
-            }];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [agent evaluateJavaScript:code
+                completionHandler:^(id _Nullable res, NSError * _Nullable error) {
+                    // Step 2. Execute the method with params
+                    DTLogDebug (@"Injected code into agent");
+                    [[Jason client] success];
+                }];
+    });
 }
 
 - (void)request:(NSDictionary *)options {
@@ -639,17 +641,19 @@
         agent.payload[@"$source"] = options[@"$source"];
 
         // Evaluate JavaScript on the agent
-        [agent evaluateJavaScript:callstring
-                completionHandler:^(id _Nullable res, NSError * _Nullable error) {
-        // Don't process return value.
-        // Instead all communication back to Jasonette is taken care of by an explicit $agent.response() call
-                    if (error) {
-                    DTLogWarning (@"%@", error);
-                    agent.payload[@"pending"] = options;
-        // The agent might not be ready. Put it in a queue.
-                    }
-                }];
-        // Agent doesn't exist, return with the error callback
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [agent evaluateJavaScript:callstring
+                    completionHandler:^(id _Nullable res, NSError * _Nullable error) {
+            // Don't process return value.
+            // Instead all communication back to Jasonette is taken care of by an explicit $agent.response() call
+                        if (error) {
+                        DTLogWarning (@"%@", error);
+                        agent.payload[@"pending"] = options;
+            // The agent might not be ready. Put it in a queue.
+                        }
+                    }];
+            // Agent doesn't exist, return with the error callback
+        });
     } else {
         [[Jason client] error];
     }
