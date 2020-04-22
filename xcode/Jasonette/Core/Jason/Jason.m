@@ -3983,6 +3983,12 @@
 # pragma mark - View Linking
 - (void)go:(NSDictionary *)href
 {
+
+    if(![href respondsToSelector:@selector(objectForKey:)])
+    {
+        DTLogDebug(@"href is not a dictionary: %@", href);
+        return;
+    }
     /*******************************
     *
     * Linking View to another View
