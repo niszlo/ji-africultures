@@ -4106,7 +4106,11 @@
 
                 DTLogDebug (@"openURL: %@", encodedUrl);
 
-                [[UIApplication sharedApplication] openURL:destination];
+                 [[UIApplication sharedApplication] openURL:destination
+                                                    options:@{}
+                                          completionHandler:^(BOOL success) {
+                                   DTLogDebug(@"Openned %@", encodedUrl);
+                }];
             } else {
                 DTLogWarning (@"Invalid Url");
             }

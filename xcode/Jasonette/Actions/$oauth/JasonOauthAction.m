@@ -9,6 +9,7 @@
 #import <Accounts/Accounts.h>
 #import <Social/Social.h>
 #import "JasonNetworking.h"
+#import "JasonLogger.h"
 
 #pragma message "TODO: Update managers to use JasonNetworking"
 
@@ -736,7 +737,12 @@
 
                                                                     if (view && [view isEqualToString:@"app"]) {
                                                                         // Launch external safari for oauth
-                                                                        [[UIApplication sharedApplication] openURL:URL];
+                                                                        [[UIApplication sharedApplication] openURL:URL
+                                                                                                            options:@{}
+                                                                                                  completionHandler:^(BOOL success) {
+                                                                                           DTLogDebug(@"Openned %@", URL);
+                                                                        }];
+                                                                        
                                                                     } else {
                                                                         // By default use SFSafariViewController
                                                                         SFSafariViewController * vc = [[SFSafariViewController alloc] initWithURL:URL];
@@ -908,7 +914,11 @@
 
                         if (view && [view isEqualToString:@"app"]) {
                             // Launch external safari for oauth
-                            [[UIApplication sharedApplication] openURL:U];
+                            [[UIApplication sharedApplication] openURL:U
+                                                                options:@{}
+                                                      completionHandler:^(BOOL success) {
+                                               DTLogDebug(@"Openned %@", U);
+                            }];
                         } else {
                             // By default use SFSafariViewController
                             SFSafariViewController * vc = [[SFSafariViewController alloc] initWithURL:U];
