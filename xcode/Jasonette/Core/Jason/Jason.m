@@ -3984,9 +3984,12 @@
 - (void)go:(NSDictionary *)href
 {
 
+    DTLogDebug(@"Go to href %@", href);
+        
+    // Href should be a dictionary
     if(![href respondsToSelector:@selector(objectForKey:)])
     {
-        DTLogDebug(@"href is not a dictionary: %@", href);
+        DTLogDebug(@"href is not a dictionary %@", href);
         return;
     }
     /*******************************
