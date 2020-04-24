@@ -1,46 +1,72 @@
+:toc: macro
+:toc-title: Table of Contents
+:toclevels: 6
+
 # Changelog
+
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Sentimental Versioning](http://sentimentalversioning.org/).
+The format is based on https://keepachangelog.com/en/1.0.0/[Keep a Changelog],
+and this project adheres to http://sentimentalversioning.org/[Sentimental Versioning].
+
+toc::[]
 
 ## [3.0.0] Next Release
 
-This version is the current in development. Will be released after the week of *6th November 2020*.
+This version is the current in development. Will be released after the week of _6th November 2020_ (maybe).
 
-## [2.0.0](https://github.com/jasonelle/jasonelle/releases/tag/v2.0)
+## 2.0.1
+
+This version have minor fixes and updates.
+
+### Changed
+
+- Bumped to minimum iOS version `10.0`.
+
+### Fixed
+
+- Crash when passing `href` with a non object.
+- Push notifications were using code that was non deterministic to obtain the token. Now the token is parsed correctly.
+- Random Crashes due to updating the UI in a background thread.
+- Removed deprecation warnings when using `[[UIApplication sharedApplication] openURL:]`.
+
+### Updated
+
+- Updated to `AFNetworking` 4.0.1 (was 3.2.1).
+
+## https://github.com/jasonelle/jasonelle/releases/tag/v2.0[2.0.0]
 
 This version was released in November 2019.
 
 ### Added
 
-- New Logger for Native Code. Makes easier to Spot Errors. See [xcode/Jasonette/Logger/README.md](xcode/Jasonette/Logger/README.md) For more details.
+- New Logger for Native Code. Makes easier to Spot Errors. See xcode/Jasonette/Logger/README.md[xcode/Jasonette/Logger/README.md] For more details.
 
 - Added `JasonNetworking.h` to enable configuring `AFHTTPSessionManager` and `AFJSONResponseSerializer`.
 
 - Docs on how to implement extensions.
 
-- Added [`uncrustify`](http://uncrustify.sourceforge.net/) config for code style standarization.
+- Added http://uncrustify.sourceforge.net/[`uncrustify`] config for code style standarization.
 
 - Added new option in `href` to load a `web` with `reader mode`.
-Based on the code by `@seletz`.
+  Based on the code by `@seletz`.
 
 ```json
 {
-    "options": {
-        "reader": true
-    }
+  "options": {
+    "reader": true
+  }
 }
 ```
 
 - Added `$orientation` system event
-that triggers when the orientation changes.
+  that triggers when the orientation changes.
 
 - Added `$env.view.params` variable that holds the query params inside the url.
-Example `https://example.com?param1=1&params2=true`. Will show `param1` and `param2` as properties inside the params dictionary.
+  Example `https://example.com?param1=1&params2=true`. Will show `param1` and `param2` as properties inside the params dictionary. (Only for for internet addresses. _file://_ does not work.)
 
 - Added `$agent.logger` to `agent.js` that can call the system logger.
-Methods: `$agent.logger.log`, `$agent.logger.debug`, `$agent.logger.info`, `$agent.logger.warn`, `$agent.logger.error`. As replacements of `console.log` methods for webviews. 
+  Methods: `$agent.logger.log`, `$agent.logger.debug`, `$agent.logger.info`, `$agent.logger.warn`, `$agent.logger.error`. As replacements of `console.log` methods for webviews.
 
 - Added optional `nonce` to url in `settings.plist`. Now is easier to invalidate server cache if needed.
 
@@ -50,7 +76,7 @@ Methods: `$agent.logger.log`, `$agent.logger.debug`, `$agent.logger.info`, `$age
 
 - Improved `JasonComponentFactory.h` to take in consideration `Swift` extensions.
 
-- Establish `AppDelegate.h` as main *App Delegate* instead of `JasonAppDelegate.h`. The later will serve as a wrapper.
+- Establish `AppDelegate.h` as main _App Delegate_ instead of `JasonAppDelegate.h`. The later will serve as a wrapper.
 
 - Improved Code Organization.
 
@@ -77,8 +103,10 @@ Methods: `$agent.logger.log`, `$agent.logger.debug`, `$agent.logger.info`, `$age
 - Fixed Crash in iOS 10 when using webcontainers. It crashed because before iOS 11 the observers to notifications does not autorelease. Solved using `INTUAutoRemoveObserver`.
 
 - Fixed Random Crash. The property `styles` in `JasonViewController` was not initialized
-in some use cases. Now is lazy allocated
-to prevent random crashes.
+  in some use cases. Now is lazy allocated
+  to prevent random crashes.
+
+- Fixed Crash when using iOS 13.
 
 ### Updated
 
@@ -126,8 +154,8 @@ to prevent random crashes.
 
 ### Notes
 
-- This version is a complete overhaul focusing on 
-modularization of the code and update of the libraries, improving the quality of the framework, maintaining the same json api.
+- This version is a complete overhaul focusing on
+  modularization of the code and update of the libraries, improving the quality of the framework, maintaining the same json api.
 
 - The next version will be re engineered so it will be easier to maintain and find bugs. New arquitecture and possible adopting Swift Language.
 
@@ -135,18 +163,18 @@ modularization of the code and update of the libraries, improving the quality of
 
 Huge thanks to the following persons that helped in this release:
 
-- [Adán Miranda](https://github.com/takakeiji): Helped with some guidance over iOS code.
+- https://github.com/takakeiji[Adán Miranda]: Helped with some guidance over iOS code.
 
 - `BSG`: Detected layout error in WKWebViews in iOS >= 11.
 
 - `John Mark`: Wrote a great tutorial in Bubble.is forums.
 
-- [Devs Chile](https://devschile.cl): Chilean commmunity of developers.
+- https://devschile.cl[Devs Chile]: Chilean commmunity of developers.
 
 - `Phillip`: Suggested the `nonce` addition.
 
-More people here [https://jasonelle.com/docs/#/folks](https://jasonelle.com/docs/#/folks).
+More people here https://jasonelle.com/docs/[https://jasonelle.com/docs/].
 
-## [1.0](https://github.com/jasonelle/jasonelle/releases/tag/v1.0)
+## https://github.com/jasonelle/jasonelle/releases/tag/v1.0[1.0]
 
-First version of the *Jasonette* Mobile Framework.
+First version of the _Jasonette_ Mobile Framework. This version was the same as the latest development version of https://github.com/jasonette/jasonette-ios[Ethan's Jasonette].

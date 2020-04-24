@@ -1,21 +1,21 @@
 PODS:
-  - AFNetworking (3.2.1):
-    - AFNetworking/NSURLSession (= 3.2.1)
-    - AFNetworking/Reachability (= 3.2.1)
-    - AFNetworking/Security (= 3.2.1)
-    - AFNetworking/Serialization (= 3.2.1)
-    - AFNetworking/UIKit (= 3.2.1)
-  - AFNetworking/NSURLSession (3.2.1):
+  - AFNetworking (4.0.1):
+    - AFNetworking/NSURLSession (= 4.0.1)
+    - AFNetworking/Reachability (= 4.0.1)
+    - AFNetworking/Security (= 4.0.1)
+    - AFNetworking/Serialization (= 4.0.1)
+    - AFNetworking/UIKit (= 4.0.1)
+  - AFNetworking/NSURLSession (4.0.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (3.2.1)
-  - AFNetworking/Security (3.2.1)
-  - AFNetworking/Serialization (3.2.1)
-  - AFNetworking/UIKit (3.2.1):
+  - AFNetworking/Reachability (4.0.1)
+  - AFNetworking/Security (4.0.1)
+  - AFNetworking/Serialization (4.0.1)
+  - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
-  - AFOAuth2Manager (3.0.0):
-    - AFNetworking/NSURLSession (~> 3.0)
+  - AFOAuth2Manager (3.0.1):
+    - AFNetworking/NSURLSession (~> 4.0)
   - AHKActionSheet (0.5.4)
   - APAddressBook (0.3.2):
     - APAddressBook/Core (= 0.3.2)
@@ -132,7 +132,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (from `https://github.com/jasonelle/ios-pod-afnetworking.git`, branch `jasonelle`)
-  - AFOAuth2Manager
+  - AFOAuth2Manager (from `https://github.com/jasonelle/ios-pod-afoauth2manager.git`, branch `jasonelle`)
   - AHKActionSheet
   - APAddressBook (from `https://github.com/jasonelle/ios-pod-apaddressbook.git`, branch `jasonelle`)
   - BBBadgeBarButtonItem
@@ -169,8 +169,7 @@ DEPENDENCIES:
   - UICKeyChainStore (from `https://github.com/jasonelle/ios-pod-uickeychainstore.git`, branch `jasonelle`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
-    - AFOAuth2Manager
+  trunk:
     - AHKActionSheet
     - BBBadgeBarButtonItem
     - DAKeyboardControl
@@ -193,6 +192,9 @@ EXTERNAL SOURCES:
   AFNetworking:
     :branch: jasonelle
     :git: https://github.com/jasonelle/ios-pod-afnetworking.git
+  AFOAuth2Manager:
+    :branch: jasonelle
+    :git: https://github.com/jasonelle/ios-pod-afoauth2manager.git
   APAddressBook:
     :branch: jasonelle
     :git: https://github.com/jasonelle/ios-pod-apaddressbook.git
@@ -255,8 +257,11 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   AFNetworking:
-    :commit: 09ee0ddfa2c5a7cbec5cdcaee892384717ec0e43
+    :commit: ffae2391ab0c29dc88eb0a58d2f5b2c2c27cadbf
     :git: https://github.com/jasonelle/ios-pod-afnetworking.git
+  AFOAuth2Manager:
+    :commit: eba4ec281a23e9a7b261f5d9e024cb70a8372c67
+    :git: https://github.com/jasonelle/ios-pod-afoauth2manager.git
   APAddressBook:
     :commit: 77888b7c4939550f84fed887945fbd22892a76c2
     :git: https://github.com/jasonelle/ios-pod-apaddressbook.git
@@ -319,8 +324,8 @@ CHECKOUT OPTIONS:
     :git: https://github.com/jasonelle/ios-pod-uickeychainstore.git
 
 SPEC CHECKSUMS:
-  AFNetworking: ef6403a1383e5a6fa4ca961d7d524b1898ce0a84
-  AFOAuth2Manager: 0566da1be64883e339813d411229fdc9a84dab7c
+  AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
+  AFOAuth2Manager: 3166f6214e646f0bb4bb77378775a45b2290f5c5
   AHKActionSheet: f0b312b5c689f72924d231c39dae140ecd5c1d46
   APAddressBook: e68ecaf95f2c323b625ae585a0d25fe505291286
   BBBadgeBarButtonItem: c2fbca0bff18e21b70defc9438a8a5048008e7ca
@@ -359,6 +364,6 @@ SPEC CHECKSUMS:
   TWMessageBarManager: fd84e7948ba7968a2b5d9454859135761214ec56
   UICKeyChainStore: 85db518bb1d294366d15ec9b92a416c4e670518f
 
-PODFILE CHECKSUM: 013d012277f8fe4cfa5cfff0109e81a816fb5c9b
+PODFILE CHECKSUM: 1cd94901a4308a7380f59cf8b11c13c09eada142
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.9.1
