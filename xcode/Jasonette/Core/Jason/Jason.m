@@ -260,7 +260,7 @@
         }
 
         if (href[@"loading"]) {
-            vc.loading = href[@"loading"];
+            vc.loading = [href[@"loading"] boolValue];
             DTLogDebug (@"Is Loading? %d", vc.loading);
         }
     }
