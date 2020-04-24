@@ -34,6 +34,7 @@ This version have minor fixes and updates.
 
 - Updated to `AFNetworking` 4.0.1 (was 3.2.1).
 - Updated to `FLEX` 4.1.1 (was 3.0.0).
+- Updated to `SocketRocket` 0.5.2 (was 0.5.1).
 
 ## https://github.com/jasonelle/jasonelle/releases/tag/v2.0[2.0.0]
 
