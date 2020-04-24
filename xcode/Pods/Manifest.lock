@@ -87,7 +87,7 @@ PODS:
     - DTFoundation/Core
   - DTFoundation/UIKit_BlocksAdditions (1.7.14):
     - DTFoundation/Core
-  - FLEX (3.0.0)
+  - FLEX (4.1.1)
   - FreeStreamer (4.0.0):
     - Reachability (~> 3.0)
   - HMSegmentedControl (1.5.5)
@@ -275,7 +275,7 @@ CHECKOUT OPTIONS:
     :commit: ec0004b82ef2dbc16a93132f498e22f824eab0cb
     :git: https://github.com/jasonelle/ios-pod-dtfoundation.git
   FLEX:
-    :commit: 226e0cd80324e7bed1d524334c2befff6b775b99
+    :commit: 2a8cdbdb84c45a89ebd48f9caad9c0420609a348
     :git: https://github.com/jasonelle/ios-pod-flex.git
   FreeStreamer:
     :commit: 810f241e40f2f06ccf01b9022164ab896a72b12e
@@ -334,7 +334,7 @@ SPEC CHECKSUMS:
   DHSmartScreenshot: ee749048bd7126c4826748f98df3a4adc6ad6c78
   DTCoreText: 67023bb51b26711d5f640c851f4845aea14c24c9
   DTFoundation: 2a31900f674de139045f4935a5656497fedda701
-  FLEX: e94a8d3d52adccff1b13f7ab7e98fddd4d3ff198
+  FLEX: 81096107977a09836eb440173010ceeef01105d6
   FreeStreamer: 7e9c976045701ac2f7e9c14c17245203c37bf2ea
   HMSegmentedControl: f514c6dad47aa3065e0ed2e8046b73efc71221b9
   INTULocationManager: e5dc524611b0cd582f473bc56cc8c389adb2f338
