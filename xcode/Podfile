@@ -5,7 +5,7 @@ use_frameworks!
 target 'Jasonette' do
 
   # System
-  pod 'UICKeyChainStore', :git => 'https://github.com/jasonelle/ios-pod-uickeychainstore.git', :branch => 'jasonelle'
+  pod 'UICKeyChainStore', :git => 'https://github.com/jasonelle/ios-pod-uickeychainstore.git', :branch => 'jasonelle', :inhibit_warnings => true
   pod 'libPhoneNumber-iOS', :git => 'https://github.com/jasonelle/ios-pod-libphonenumber.git', :branch => 'jasonelle'
   pod 'DTFoundation', :git => 'https://github.com/jasonelle/ios-pod-dtfoundation.git', :branch => 'jasonelle'
   pod 'DTCoreText', :git => 'https://github.com/jasonelle/ios-pod-dtcoretext.git', :branch => 'jasonelle'
@@ -32,7 +32,7 @@ target 'Jasonette' do
   
   # Audio
   pod 'IQAudioRecorderController'
-  pod 'FreeStreamer', :git => 'https://github.com/jasonelle/ios-pod-freestreamer.git', :branch => 'jasonelle'
+  pod 'FreeStreamer', :git => 'https://github.com/jasonelle/ios-pod-freestreamer.git', :branch => 'jasonelle', :inhibit_warnings => true
   
   # Views
   pod 'MBProgressHUD', '~> 1.0'
@@ -46,7 +46,7 @@ target 'Jasonette' do
   pod 'BBBadgeBarButtonItem'
   
   pod 'REMenu', :git => 'https://github.com/jasonelle/ios-pod-remenu.git', :branch => 'jasonelle'
-  pod 'JDStatusBarNotification' # $util.toast
+  pod 'JDStatusBarNotification', :git => 'https://github.com/jasonelle/ios-pod-jdstatusbarnotification.git', :inhibit_warnings => true # $util.toast
   pod 'HMSegmentedControl', :git => 'https://github.com/jasonelle/ios-pod-hmsegmentedcontrol.git', :branch => 'jasonelle'
   pod 'SWFrameButton'
   
