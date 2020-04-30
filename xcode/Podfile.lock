@@ -117,9 +117,9 @@ PODS:
     - RMActionController (~> 1.0.5)
   - SBJson (5.0.0)
   - SCSiriWaveformView (1.1.1)
-  - SDWebImage (3.8.1):
-    - SDWebImage/Core (= 3.8.1)
-  - SDWebImage/Core (3.8.1)
+  - SDWebImage (3.8.3):
+    - SDWebImage/Core (= 3.8.3)
+  - SDWebImage/Core (3.8.3)
   - SocketRocket (0.5.2)
   - SWFrameButton (1.2.2)
   - SWTableViewCell (0.3.7)
@@ -158,7 +158,7 @@ DEPENDENCIES:
   - REMenu (from `https://github.com/jasonelle/ios-pod-remenu.git`, branch `jasonelle`)
   - RMDateSelectionViewController
   - SBJson (from `https://github.com/jasonelle/ios-pod-sbjson.git`, branch `jasonelle`)
-  - SDWebImage (from `https://github.com/jasonelle/ios-pod-sdwebimage.git`, tag `3.8.1`)
+  - SDWebImage (from `https://github.com/jasonelle/ios-pod-sdwebimage.git`, tag `3.8.3`)
   - SocketRocket (from `https://github.com/jasonelle/ios-pod-socketrocket.git`, branch `jasonelle`)
   - SWFrameButton
   - SWTableViewCell (from `https://github.com/jasonelle/ios-pod-swtableviewcell.git`, branch `jasonelle`)
@@ -239,7 +239,7 @@ EXTERNAL SOURCES:
     :git: https://github.com/jasonelle/ios-pod-sbjson.git
   SDWebImage:
     :git: https://github.com/jasonelle/ios-pod-sdwebimage.git
-    :tag: 3.8.1
+    :tag: 3.8.3
   SocketRocket:
     :branch: jasonelle
     :git: https://github.com/jasonelle/ios-pod-socketrocket.git
@@ -310,7 +310,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/jasonelle/ios-pod-sbjson.git
   SDWebImage:
     :git: https://github.com/jasonelle/ios-pod-sdwebimage.git
-    :tag: 3.8.1
+    :tag: 3.8.3
   SocketRocket:
     :commit: 43d48b7a1d94a5ec8add07fc4ff892ed0ba7cc78
     :git: https://github.com/jasonelle/ios-pod-socketrocket.git
@@ -358,7 +358,7 @@ SPEC CHECKSUMS:
   RMDateSelectionViewController: 354a0f1fe40bac01054528b7a8735f2973bbd813
   SBJson: 72547475887af34b161b2b9dce8c20415d8b6c68
   SCSiriWaveformView: 15b9dd6f94c7536e2032b34a35c6ff74d38c7411
-  SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
+  SDWebImage: a72e880a8fe0f7fc31efe15aaed443c074d2a80c
   SocketRocket: 3dad623634f938c3930a9481428960d7e9fdbbf1
   SWFrameButton: cd3cc4a8961e8975f4800c0f6d1d3c54c213eb87
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
@@ -368,6 +368,6 @@ SPEC CHECKSUMS:
   TWMessageBarManager: fd84e7948ba7968a2b5d9454859135761214ec56
   UICKeyChainStore: 85db518bb1d294366d15ec9b92a416c4e670518f
 
-PODFILE CHECKSUM: 6a40803cafff7f5a560d51a4750686732886c53e
+PODFILE CHECKSUM: 9905a14242f97f58ac08dc088710874cdcd805d6
 
 COCOAPODS: 1.9.1

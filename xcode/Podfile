@@ -28,7 +28,7 @@ target 'Jasonette' do
   pod 'AFOAuth2Manager', :git => 'https://github.com/jasonelle/ios-pod-afoauth2manager.git', :branch => 'jasonelle'
 
   ## TODO: Update to latest version
-  pod 'SDWebImage', :git => 'https://github.com/jasonelle/ios-pod-sdwebimage.git', :tag => '3.8.1', :inhibit_warnings => true
+  pod 'SDWebImage', :git => 'https://github.com/jasonelle/ios-pod-sdwebimage.git', :tag => '3.8.3', :inhibit_warnings => true
   
   # Audio
   pod 'IQAudioRecorderController'
