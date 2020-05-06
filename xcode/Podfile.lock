@@ -258,7 +258,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   AFNetworking:
-    :commit: ffae2391ab0c29dc88eb0a58d2f5b2c2c27cadbf
+    :commit: 7bdce9a849da1e9a7cc29fd4c45a92115145f3d7
     :git: https://github.com/jasonelle/ios-pod-afnetworking.git
   AFOAuth2Manager:
     :commit: eba4ec281a23e9a7b261f5d9e024cb70a8372c67
