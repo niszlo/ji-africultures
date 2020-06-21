@@ -1485,11 +1485,12 @@
     });
 }
 
+#pragma mark - Mixin
 - (id)resolve_remote_reference:(NSString *)json
 {
     DTLogDebug (@"Resolving Remote References");
     NSError * error;
-
+    // Mixins can be used with '@' or '+' symbol
     // Remote url with path - convert "@": "blah.blah@https://www.google.com" to "{{#include $root[\"https://www.google.com\"].blah.blah}}": {}
     // The pattern leaves out the pattern where it starts with "$" because that's a $document and will be resolved by resolve_local_reference
     NSString * remote_pattern_with_path = @"\"([+@])\"[ ]*:[ ]*\"(([^$\"@]+)(@))([^\"]+)\"";
