@@ -1339,6 +1339,7 @@
     callback (resolved);
 }
 
+#pragma mark - $require action
 - (void)require
 {
     DTLogInfo (@"Require Json");
@@ -1488,7 +1489,9 @@
 #pragma mark - Mixin
 - (id)resolve_remote_reference:(NSString *)json
 {
-    DTLogDebug (@"Resolving Remote References");
+    DTLogInfo (@"Remote Reference Mixin");
+    DTLogDebug (@"Resolving Remote References For Json %@", json);
+    
     NSError * error;
     // Mixins can be used with '@' or '+' symbol
     // Remote url with path - convert "@": "blah.blah@https://www.google.com" to "{{#include $root[\"https://www.google.com\"].blah.blah}}": {}
@@ -1532,7 +1535,8 @@
 
 - (id)resolve_local_reference:(NSString *)json
 {
-    DTLogInfo (@"Resolving Local References");
+    DTLogInfo (@"Local Reference Mixin");
+    DTLogDebug (@"Resolving Local References For Json %@", json);
 
     // Local - convert "@": "$document.blah.blah" to "{{#include $root.$document.blah.blah}}": {}
     NSError * error;
@@ -1547,20 +1551,27 @@
                                                      options:kNilOptions
                                                        range:NSMakeRange (0, json.length)
                                                 withTemplate:@"\"{{#include \\$root.$1}}\": {}"];
-
+    
+    
     id tpl = [JasonHelper objectify:converted];
 
     NSMutableDictionary * refs = [VC.requires mutableCopy];
 
+    
     refs[@"$document"] = VC.original;
+    
+    DTLogDebug(@"TPL %@ Refs", tpl, refs);
 
     id include_resolved = [JasonParser parse:refs with:tpl];
 
     VC.original = include_resolved;
+    
+    DTLogDebug(@"Resolved References %@", include_resolved);
 
     return include_resolved;
 }
 
+#pragma mark - Lifecycle
 - (Jason *)detach:(JasonViewController *)viewController
 {
     // Need to clean up before leaving the view
