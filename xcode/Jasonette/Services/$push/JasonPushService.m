@@ -14,48 +14,48 @@
 
 @implementation JasonPushService
 
-- (nonnull NSDictionary *) normalize:(nullable NSDictionary *) userInfo {
-    
+- (nonnull NSDictionary *)normalize:(nullable NSDictionary *)userInfo {
     if (!userInfo) {
         return @{};
     }
-    
+
     // Check if the userInfo is a string
     NSDictionary * info = userInfo[@"href"];
-    
-    if(!info) {
+
+    if (!info) {
         info = userInfo[@"action"];
     }
-    
-    if([info respondsToSelector:@selector(containsString:)]) {
+
+    if ([info respondsToSelector:@selector(containsString:)]) {
         // Maybe the userInfo is a json object in a string
         // This can be a case when a notification payload is sent via Firebase or similar
         // That only strings are allowed in the data attribute of the notification.
-        NSString * json = (NSString *) info;
+        NSString * json = (NSString *)info;
         NSError * error = nil;
         id jsonObject = [NSJSONSerialization
-                          JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding]
-                          options:kNilOptions
-                          error:&error];
+                         JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding]
+                                    options:kNilOptions
+                                      error:&error];
 
-        DTLogDebug(@"Detected and parsed json string in userInfo %@", jsonObject);
+        DTLogDebug (@"Detected and parsed json string in userInfo %@", jsonObject);
         info = jsonObject;
-        if(error) {
-            DTLogDebug(@"%@", error);
+
+        if (error) {
+            DTLogDebug (@"%@", error);
             info = nil;
         }
     }
-    
+
     NSMutableDictionary * normalized = [userInfo mutableCopy];
-    
-    if(info) {
-        if(normalized[@"href"]) {
+
+    if (info) {
+        if (normalized[@"href"]) {
             normalized[@"href"] = info;
-        } else if(normalized[@"action"]) {
+        } else if (normalized[@"action"]) {
             normalized[@"action"] = info;
         }
     }
-    
+
     return [normalized copy];
 }
 
@@ -66,7 +66,7 @@
 #ifdef PUSH
 
     NSDictionary * userInfo = [self normalize:[launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]];
-    
+
     if (userInfo[@"href"]) {
         [[Jason client] call:@{
              @"type": @"$href",
@@ -116,11 +116,10 @@
 
     if (events) {
         if (events[@"$push.onregister"]) {
-            
-            NSDictionary * params = @{@"$jason": @{@"token": @""}};
-            
-            if(payload && payload[@"token"]) {
-                params = @{@"$jason": payload};
+            NSDictionary * params = @{ @"$jason": @{ @"token": @"" } };
+
+            if (payload && payload[@"token"]) {
+                params = @{ @"$jason": payload };
             }
 
             DTLogDebug (@"Calling $push.onregister event with params %@", params);
@@ -138,13 +137,11 @@
 }
 
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
-    
     if (response.notification.request.content.userInfo) {
-        
         DTLogDebug (@"Received Notification Response %@", response.notification.request.content.userInfo);
 
         NSDictionary * userInfo = [self normalize:response.notification.request.content.userInfo];
-        
+
         if (userInfo[@"href"]) {
             DTLogDebug (@"Show href");
             [[Jason client] go:userInfo[@"href"]];

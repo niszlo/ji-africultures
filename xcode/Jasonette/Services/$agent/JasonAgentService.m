@@ -73,8 +73,8 @@
             // to keep track of the source agent so that a response
             // can be sent back to the $source later.
             event[@"$source"] = @{
-                    @"id": identifier,
-                    @"nonce": m[@"nonce"]
+                @"id": identifier,
+                @"nonce": m[@"nonce"]
             };
 
             DTLogDebug (@"Requesting %@", event);
@@ -140,6 +140,7 @@
 
     // Inject agent.js into agent context
     NSString * identifier = webView.payload[@"identifier"];
+
     DTLogDebug (@"Injecting agent.js into context %@", identifier);
     NSString * raw = [JasonHelper read_local_file:@"file://agent.js"];
 
@@ -151,7 +152,7 @@
     NSString * custom = [JasonHelper read_local_file:@"file://custom.js"];
     NSString * summon = [[raw
                           stringByAppendingString:interface]
-                            stringByAppendingString:custom];
+                         stringByAppendingString:custom];
 
     webView.payload[@"state"] = @"rendered";
 
@@ -160,7 +161,7 @@
                   DTLogInfo (@"Injected $agent into context");
 
                   if (error) {
-                  DTLogWarning (@"%@", error);
+                      DTLogWarning (@"%@", error);
                   }
               }];
 
@@ -192,20 +193,20 @@
                 NSDictionary * resolved;
                 NSMutableDictionary * data_stub = [[[Jason client] variables] mutableCopy];
 
-            // Prepare the url to return
+                // Prepare the url to return
                 NSString * url;
 
                 if ([navigationAction.request.URL.absoluteString hasPrefix:@"file://"]) {
                     NSString * resourcePath = [[NSBundle mainBundle] resourcePath];
 
                     if ([navigationAction.request.URL.absoluteString containsString:resourcePath]) {
-            // it's an internal path. Convert it to regular file format
+                        // it's an internal path. Convert it to regular file format
                         url = [navigationAction.request.URL.absoluteString stringByReplacingOccurrencesOfString:resourcePath withString:@""];
 
-            // Turn 'file:///' into 'file://'
+                        // Turn 'file:///' into 'file://'
                         url = [url stringByReplacingOccurrencesOfString:@"file:///" withString:@"file://"];
                     } else {
-            // it's a regular file url, like: file://local.json
+                        // it's a regular file url, like: file://local.json
                         url = navigationAction.request.URL.absoluteString;
                     }
                 } else {
@@ -233,8 +234,8 @@
                 decisionHandler (WKNavigationActionPolicyAllow);
             } else {
                 if ([navigationAction.sourceFrame isEqual:navigationAction.targetFrame]) {
-                // normal navigation
-                // Need to handle JASON action
+                    // normal navigation
+                    // Need to handle JASON action
                     if (navigationAction.navigationType == WKNavigationTypeLinkActivated) {
                         decisionHandler (WKNavigationActionPolicyCancel);
 
@@ -301,7 +302,7 @@
         if (url) {
             // contains "url" attribute
             if ([url containsString:@"file://"]) {
-            // File URL
+                // File URL
                 DTLogDebug (@"Loading with Local File %@", url);
                 NSString * path = [JasonHelper get_local_path:url];
                 NSURL * u = [NSURL fileURLWithPath:path isDirectory:NO];
@@ -316,16 +317,20 @@
                 NSMutableURLRequest * nsrequest = [[NSURLRequest requestWithURL:nsurl] mutableCopy];
 
                 NSDictionary * innerOptions = options[@"options"];
-                if(innerOptions) {
+
+                if (innerOptions) {
                     NSDictionary * headers = innerOptions[@"header"];
-                    if(!headers) {
+
+                    if (!headers) {
                         headers = innerOptions[@"headers"];
                     }
-                    for(NSString * key in headers) {
-                        DTLogDebug(@"Using Header %@ : %@", key, headers[key], nsrequest.URL);
+
+                    for (NSString * key in headers) {
+                        DTLogDebug (@"Using Header %@ : %@", key, headers[key], nsrequest.URL);
                         [nsrequest addValue:headers[key] forHTTPHeaderField:key];
                     }
                 }
+
                 if (shouldReload) {
                     [agent loadRequest:nsrequest];
                 }
@@ -357,6 +362,7 @@
     }
 
     JasonViewController * vc = (JasonViewController *)[[Jason client] getVC];
+
     [vc.view setNeedsDisplay];
 }
 
@@ -369,7 +375,7 @@
 
         // 1. Initialize
         if (vc.agents && vc.agents[identifier]) {
-        // Already existing agent, juse reuse the old one
+            // Already existing agent, juse reuse the old one
             WKWebView * agent = vc.agents[identifier];
             agent.payload[@"state"] = @"empty";
             NSMutableDictionary * new_options = [options mutableCopy];
@@ -472,16 +478,14 @@
                     forKeyPath:NSStringFromSelector (@selector(estimatedProgress))
                        options:NSKeyValueObservingOptionNew
                        context:NULL];
-
         } else {
             // This helper will allow to continue execution normally.
-            DTLogDebug(@"iOS <= 10 detected. Using AutoRemoveObserver for agent %@", identifier);
+            DTLogDebug (@"iOS <= 10 detected. Using AutoRemoveObserver for agent %@", identifier);
             [INTUAutoRemoveObserver addObserver:self
-                                 forKeyPath:NSStringFromSelector (@selector(estimatedProgress))
-                                    options:NSKeyValueObservingOptionNew
+                                     forKeyPath:NSStringFromSelector (@selector(estimatedProgress))
+                                        options:NSKeyValueObservingOptionNew
                                         context:(__bridge void * _Nullable)(identifier)];
         }
-        
 
         agent.hidden = YES;
 
@@ -603,7 +607,7 @@
 }
 
 - (void)inject:(NSString *)code into:(WKWebView *)agent {
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async (dispatch_get_main_queue (), ^{
         [agent evaluateJavaScript:code
                 completionHandler:^(id _Nullable res, NSError * _Nullable error) {
                     // Step 2. Execute the method with params
@@ -641,15 +645,15 @@
         agent.payload[@"$source"] = options[@"$source"];
 
         // Evaluate JavaScript on the agent
-        dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_async (dispatch_get_main_queue (), ^{
             [agent evaluateJavaScript:callstring
                     completionHandler:^(id _Nullable res, NSError * _Nullable error) {
-            // Don't process return value.
-            // Instead all communication back to Jasonette is taken care of by an explicit $agent.response() call
+                        // Don't process return value.
+                        // Instead all communication back to Jasonette is taken care of by an explicit $agent.response() call
                         if (error) {
-                        DTLogWarning (@"%@", error);
-                        agent.payload[@"pending"] = options;
-            // The agent might not be ready. Put it in a queue.
+                            DTLogWarning (@"%@", error);
+                            agent.payload[@"pending"] = options;
+                            // The agent might not be ready. Put it in a queue.
                         }
                     }];
             // Agent doesn't exist, return with the error callback
@@ -666,23 +670,23 @@
         [progressView setAlpha:1.0f];
         [progressView setProgress:((WKWebView *)object).estimatedProgress animated:YES];
         DTLogDebug (@"%f", progressView.progress);
-        
-        WKWebView * webview = (WKWebView *) object;
-        
+
+        WKWebView * webview = (WKWebView *)object;
+
         BOOL iOS11 = NO;
-        
-        if(@available(iOS 11, *)){
+
+        if (@available(iOS 11, *)) {
             iOS11 = YES;
         }
-        
+
         if (!iOS11 && context != NULL) {
             NSString * identifier = (__bridge NSString *)(context);
-            DTLogDebug(@"iOS <= 10 %@", identifier);
+            DTLogDebug (@"iOS <= 10 %@", identifier);
             JasonViewController * vc = (JasonViewController *)[[Jason client] getVC];
             webview = vc.agents[identifier];
         }
 
-        if(webview && [webview respondsToSelector:@selector(estimatedProgress)]){
+        if (webview && [webview respondsToSelector:@selector(estimatedProgress)]) {
             if (webview.estimatedProgress >= 1.0f) {
                 [UIView animateWithDuration:0.3
                                       delay:0.3
@@ -691,8 +695,8 @@
                                      [progressView setAlpha:0.0f];
                                  }
                                  completion:^(BOOL finished) {
-                                     [progressView  setProgress:0.0f
-                                      animated:NO];
+                                     [progressView setProgress:0.0f
+                                                      animated:NO];
                                  }];
             }
         }

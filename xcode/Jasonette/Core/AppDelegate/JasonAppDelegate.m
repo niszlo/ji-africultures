@@ -320,7 +320,7 @@ static NSArray * _services;
     // Device token can be have variable length.
     // Also using [deviceToken description] is not a good practice (description can change in the future)
     // Solution based on this answer https://stackoverflow.com/a/16411517
-    
+
     const char * data = [deviceToken bytes];
     NSMutableString * token = [@"" mutableCopy];
     NSMutableString * tokenLowerCase = [@"" mutableCopy];
@@ -329,18 +329,18 @@ static NSArray * _services;
         [token appendFormat:@"%02.2hhX", data[i]];
         [tokenLowerCase appendFormat:@"%02.2hhx", data[i]];
     }
-    
+
     NSDictionary * params = @{
-                @"token": token,
-                @"tokenlower": tokenLowerCase
+        @"token": token,
+        @"tokenlower": tokenLowerCase
     };
-    
+
     DTLogDebug (@"Got Device Token %@ %@", params, deviceToken);
 
     [[NSNotificationCenter defaultCenter]
      postNotificationName:@"onRemoteNotificationDeviceRegistered"
                    object:nil
-     userInfo:params];
+                 userInfo:params];
 }
 
 + (void)             application:(UIApplication *)application

@@ -188,7 +188,7 @@
 @implementation JasonPushAction
 
 
-- (void) register {
+- (void)register {
     // currently only remote notification
 #ifdef PUSH
 
@@ -202,16 +202,16 @@
 
     [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge)
                           completionHandler:^(BOOL granted, NSError * _Nullable error)
-    {
-        if (!error && granted) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [[UIApplication sharedApplication] registerForRemoteNotifications];
-            });
-            [[Jason client] success];
-        } else {
-            [[Jason client] error];
-        }
-    }];
+                              {
+                              if (!error && granted) {
+                              dispatch_async (dispatch_get_main_queue (), ^{
+                                     [[UIApplication sharedApplication] registerForRemoteNotifications];
+                                 });
+                              [[Jason client] success];
+                              } else {
+                              [[Jason client] error];
+                              }
+                          }];
 
 #else  /* ifdef PUSH */
     DTLogWarning (@"Push notification turned off by default. If you'd like to suport push, uncomment the #define statement in Constants.h and turn on the push notification feature from the capabilities tab.");
