@@ -1157,6 +1157,64 @@
 
 # pragma mark - View initialization & teardown
 
+- (NSDictionary *) getMethodForUrl: (NSString *) url {
+    // Check for [POST|GET|PUT] method in Url
+   NSString * pattern = @"\\[(POST|GET|PUT|HEAD|DELETE)\\]";
+   NSError * regexError = nil;
+    
+   NSRegularExpression * regex = [NSRegularExpression
+   regularExpressionWithPattern:pattern
+                        options:NSRegularExpressionCaseInsensitive | NSRegularExpressionDotMatchesLineSeparators
+                          error:&regexError];
+   
+   if (regexError) {
+       DTLogWarning (@"Regex Error in Extracting URL pattern %@ error %@", pattern, regexError);
+   }
+
+    NSArray * matches = [regex matchesInString:url
+                                      options:NSMatchingWithoutAnchoringBounds
+                                        range:NSMakeRange (0, url.length)];
+    
+    
+    NSString * parsed = url;
+    NSString * method = @"get";
+    
+    
+    NSTextCheckingResult * match = [matches firstObject];
+    NSRange range;
+    
+    if(match) {
+        range = [match rangeAtIndex:0];
+        
+        if(range.length > 0) {
+            parsed = [url substringWithRange:NSMakeRange(0, url.length - range.length)];
+            
+            method = [[[url substringWithRange:range]
+                       lowercaseString]
+                      stringByTrimmingCharactersInSet:[NSCharacterSet
+                                                       characterSetWithCharactersInString:@"[]"]];
+        }
+        
+    }
+    
+    BOOL shouldDownload = YES;
+    // if the url contains brackets [] and its the same as the original
+    // it means it maybe has wrong format
+    // so its better to not download it or it could crash the app
+    if([parsed isEqualToString:url] && ([url containsString:@"["] || [url containsString:@"]"])) {
+        DTLogDebug(@"Mixin Parsed: %@ is equal to original url %@. Maybe is syntax error. Omitting download.", parsed, url);
+        parsed = @"";
+        shouldDownload = NO;
+    }
+    
+    return @{
+        @"original": url,
+        @"parsed": parsed,
+        @"method": method,
+        @"shouldDownload": @(shouldDownload)
+    };
+}
+
 - (void)         include:(id)json
     andCompletionHandler:(void (^)(id obj))callback
 {
@@ -1173,6 +1231,9 @@
     NSString * pattern = @"\"([+@])\"[ ]*:[ ]*\"([^$\"@]+@)?([^$\"]+)\"";
 
     NSMutableSet * urlSet = [NSMutableSet new];
+    
+    NSMutableDictionary * parsedMixinItems = [@{} mutableCopy];
+    
     NSRegularExpression * regex = [NSRegularExpression
                                    regularExpressionWithPattern:pattern
                                                         options:NSRegularExpressionCaseInsensitive | NSRegularExpressionDotMatchesLineSeparators
@@ -1206,10 +1267,18 @@
         if (group3.length > 0) {
             // Group 3 is for the URL
             NSString * url = [j substringWithRange:group3];
+            
+            NSDictionary * params = [self getMethodForUrl:url];
+            
+            DTLogDebug(@"Mixin Params: %@", params);
 
-            if (!VC.requires[url]) {
-                DTLogDebug (@"Adding object to url set %@", url);
-                [urlSet addObject:url];
+            if([params[@"shouldDownload"] boolValue]) {
+                if (!VC.requires[params[@"parsed"]]) {
+                    DTLogDebug (@"Adding Mixin URL %@", url);
+                    parsedMixinItems[params[@"parsed"]] = params;
+                    parsedMixinItems[url] = params;
+                    [urlSet addObject:params[@"parsed"]];
+                }
             }
         }
     }
@@ -1305,21 +1374,58 @@
 
                 // 6. Start request
 #pragma message "Start Request in Include"
-                [manager   GET:url
-                    parameters:parameters
-                       headers:nil
-                      progress:^(NSProgress * _Nonnull downloadProgress) { }
-                       success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject)
-                           {
-                           self->VC.requires[url] = responseObject;
-                           dispatch_group_leave (requireGroup);
-                       }
-                       failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
-                           {
-                           DTLogWarning (@"Error Fetching JSON From Url %@ %@", url, error);
-                           self->VC.requires[url] = @{};
-                           dispatch_group_leave (requireGroup);
-                       }];
+                
+                DTLogDebug(@"Mixin Fetching %@ With Params %@", url, parsedMixinItems[url]);
+                
+                NSString * method = parsedMixinItems[url][@"method"];
+                NSString * originalUrl = parsedMixinItems[url][@"original"];
+                
+                // TODO: Maybe add a better handler and more http methods and params
+                if([method isEqualToString:@"post"]) {
+                    
+                    DTLogDebug(@"Fetching with POST");
+                    
+                    [manager   POST:url
+                                       parameters:parameters
+                                          headers:nil
+                                         progress:^(NSProgress * _Nonnull downloadProgress) { }
+                                          success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject)
+                                              {
+                                              self->VC.requires[url] = responseObject;
+                                              self->VC.requires[originalUrl] = responseObject;
+                                              DTLogDebug(@"VC.requires %@", self->VC.requires);
+                                              dispatch_group_leave (requireGroup);
+                                          }
+                                          failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
+                                              {
+                                              DTLogWarning (@"Error Fetching JSON From Url %@ %@", url, error);
+                                              self->VC.requires[url] = @{};
+                                              self->VC.requires[originalUrl] = @{};
+                                              dispatch_group_leave (requireGroup);
+                                          }];
+                } else {
+                    DTLogDebug(@"Fetching with GET");
+                    [manager   GET:url
+                                       parameters:parameters
+                                          headers:nil
+                                         progress:^(NSProgress * _Nonnull downloadProgress) { }
+                                          success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject)
+                                              {
+                                              // Save original url too
+                                              // TODO: improve the requires
+                                              self->VC.requires[url] = responseObject;
+                                              self->VC.requires[originalUrl] = responseObject;
+                                              DTLogDebug(@"VC.requires %@", self->VC.requires);
+                                              dispatch_group_leave (requireGroup);
+                                          }
+                                          failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
+                                              {
+                                              DTLogWarning (@"Error Fetching JSON From Url %@ %@", url, error);
+                                              self->VC.requires[url] = @{};
+                                              self->VC.requires[originalUrl] = @{};
+                                              dispatch_group_leave (requireGroup);
+                                          }];
+                }
             }
         }
 
