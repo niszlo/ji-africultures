@@ -1391,7 +1391,6 @@
                                          progress:^(NSProgress * _Nonnull downloadProgress) { }
                                           success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject)
                                               {
-                                              self->VC.requires[url] = responseObject;
                                               self->VC.requires[originalUrl] = responseObject;
                                               DTLogDebug(@"VC.requires %@", self->VC.requires);
                                               dispatch_group_leave (requireGroup);
@@ -1399,7 +1398,6 @@
                                           failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
                                               {
                                               DTLogWarning (@"Error Fetching JSON From Url %@ %@", url, error);
-                                              self->VC.requires[url] = @{};
                                               self->VC.requires[originalUrl] = @{};
                                               dispatch_group_leave (requireGroup);
                                           }];
@@ -1411,9 +1409,6 @@
                                          progress:^(NSProgress * _Nonnull downloadProgress) { }
                                           success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject)
                                               {
-                                              // Save original url too
-                                              // TODO: improve the requires
-                                              self->VC.requires[url] = responseObject;
                                               self->VC.requires[originalUrl] = responseObject;
                                               DTLogDebug(@"VC.requires %@", self->VC.requires);
                                               dispatch_group_leave (requireGroup);
@@ -1421,7 +1416,6 @@
                                           failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
                                               {
                                               DTLogWarning (@"Error Fetching JSON From Url %@ %@", url, error);
-                                              self->VC.requires[url] = @{};
                                               self->VC.requires[originalUrl] = @{};
                                               dispatch_group_leave (requireGroup);
                                           }];
