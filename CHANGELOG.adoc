@@ -11,21 +11,22 @@ and this project adheres to http://sentimentalversioning.org/[Sentimental Versio
 
 toc::[]
 
-## [3.0.0] Next Release
-
-This version is the current in development. Will be released after the week of _6th November 2020_ (maybe).
-
-## 2.0.1
+## 2.1.0
 
 This version have minor fixes and updates.
 
+### Added
+
+- Ability to use mixin with _POST_ requests. Example: `{"@": "https://example.com[POST]"}` would fetch the url using _POST_ instead of _GET_ (Useful for _Bubble_ or similar systems).
+
 ### Changed
 
-- Bumped to minimum iOS version `10.0`.
+- Bumped to minimum iOS version `11.0`.
 
 ### Fixed
 
 - Crash when passing `href` with a non object.
+- Crash in iOS 14.
 - Push notifications were using code that was non deterministic to obtain the token. Now the token is parsed correctly.
 - Random Crashes due to updating the UI in a background thread.
 - Removed deprecation warnings when using `[[UIApplication sharedApplication] openURL:]`.
@@ -35,6 +36,7 @@ This version have minor fixes and updates.
 - Updated to `AFNetworking` 4.0.1 (was 3.2.1).
 - Updated to `FLEX` 4.1.1 (was 3.0.0).
 - Updated to `SocketRocket` 0.5.2 (was 0.5.1).
+- Updated to `SWTableViewCell` 0.3.8 (was 0.3.7)
 
 ## https://github.com/jasonelle/jasonelle/releases/tag/v2.0[2.0.0]
 

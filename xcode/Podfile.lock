@@ -315,7 +315,7 @@ CHECKOUT OPTIONS:
     :commit: 43d48b7a1d94a5ec8add07fc4ff892ed0ba7cc78
     :git: https://github.com/jasonelle/ios-pod-socketrocket.git
   SWTableViewCell:
-    :commit: 1c8845e25f520c959391bd79dc6cf271e0cf9a44
+    :commit: 5cf396fe8f42dc199b157c96da29b64e9248c2e4
     :git: https://github.com/jasonelle/ios-pod-swtableviewcell.git
   TTTAttributedLabel:
     :commit: b0f1f93d5d4368a7aaf52e848013a1b40b00dc3c
