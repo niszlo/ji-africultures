@@ -17,7 +17,12 @@ This version have minor fixes and updates.
 
 ### Added
 
-- Ability to use mixin with _POST_ requests. Example: `{"@": "https://example.com[POST]"}` would fetch the url using _POST_ instead of _GET_ (Useful for _Bubble_ or similar systems).
+- Ability to use mixin with _POST_ requests. Example:
+
+```json
+{"@": "https://example.com[POST]"}
+``` 
+Would fetch the url using _POST_ instead of _GET_ (Useful for _Bubble_ or similar systems).
 
 ### Changed
 
