@@ -26,7 +26,7 @@ Would fetch the url using _POST_ instead of _GET_ (Useful for _Bubble_ or simila
 
 ### Changed
 
-- Bumped to minimum iOS version `11.0`.
+- Bumped to minimum iOS version `12.0`.
 
 ### Fixed
 
