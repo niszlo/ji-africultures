@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>url</key>
-	<string>file://hello.json</string>
+	<string>file://home.json</string>
 	<key>append_nonce_to_url</key>
 	<false/>
 	<key>client_id</key>
