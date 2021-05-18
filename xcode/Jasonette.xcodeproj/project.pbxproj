@@ -99,7 +99,7 @@
 		EF4DEF39243D62140060AE4E /* custom.js in Resources */ = {isa = PBXBuildFile; fileRef = EF4DEF38243D62140060AE4E /* custom.js */; };
 		EF72736823465463005C5515 /* INTUAutoRemoveObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = EF72736623465463005C5515 /* INTUAutoRemoveObserver.m */; };
 		EF82979B22D30A71003ED64B /* jr.sample.json in Resources */ = {isa = PBXBuildFile; fileRef = EF82979922D30A71003ED64B /* jr.sample.json */; };
-		EF9781C322D9A0810024FDAE /* home.json in Resources */ = {isa = PBXBuildFile; fileRef = EF9781C222D9A0810024FDAE /* home.json */; };
+		EF9781C322D9A0810024FDAE /* hello.json in Resources */ = {isa = PBXBuildFile; fileRef = EF9781C222D9A0810024FDAE /* hello.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -263,7 +263,7 @@
 		EF72736723465463005C5515 /* INTUAutoRemoveObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INTUAutoRemoveObserver.h; sourceTree = "<group>"; };
 		EF82979222D28D96003ED64B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Jasonette/Info.plist; sourceTree = SOURCE_ROOT; };
 		EF82979922D30A71003ED64B /* jr.sample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = jr.sample.json; sourceTree = "<group>"; };
-		EF9781C222D9A0810024FDAE /* home.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = home.json; sourceTree = "<group>"; };
+		EF9781C222D9A0810024FDAE /* hello.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = hello.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -340,7 +340,7 @@
 			children = (
 				EF4DEF38243D62140060AE4E /* custom.js */,
 				EF072F5F22D28B2400973DE1 /* settings.plist */,
-				EF9781C222D9A0810024FDAE /* home.json */,
+				EF9781C222D9A0810024FDAE /* hello.json */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -1176,7 +1176,7 @@
 				EF07A1CC22D6186100D0D3FF /* Next@2x.png in Resources */,
 				EF0D487A2366626500CCC7AF /* hjson.js in Resources */,
 				EF07A1D422D6186100D0D3FF /* agent.js in Resources */,
-				EF9781C322D9A0810024FDAE /* home.json in Resources */,
+				EF9781C322D9A0810024FDAE /* hello.json in Resources */,
 				EF07A1C722D6186100D0D3FF /* placeholderr@2x.png in Resources */,
 				EF82979B22D30A71003ED64B /* jr.sample.json in Resources */,
 				EF07A1D222D6186100D0D3FF /* xhtml.js in Resources */,
