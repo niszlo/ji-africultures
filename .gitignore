@@ -85,3 +85,4 @@ DerivedData/
 # End of https://www.gitignore.io/api/xcode,macos,cocoapods,visualstudiocode
 
 node_modules/
+release/
