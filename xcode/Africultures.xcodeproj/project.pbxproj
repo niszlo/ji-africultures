@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5EE85B6C1DA45F8F0049EACE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EE85B6B1DA45F8F0049EACE /* MapKit.framework */; };
-		ACDAE25BCC06F4D2B1364277 /* Pods_Jasonette.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDE1A3D4D97BE5A73CB39B96 /* Pods_Jasonette.framework */; };
+		ACDAE25BCC06F4D2B1364277 /* Pods_Africultures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDE1A3D4D97BE5A73CB39B96 /* Pods_Africultures.framework */; };
 		EF07303A22D28B2400973DE1 /* settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = EF072F5F22D28B2400973DE1 /* settings.plist */; };
 		EF07303B22D28B2400973DE1 /* com.jasonelle.app.test.webview.json in Resources */ = {isa = PBXBuildFile; fileRef = EF072F6022D28B2400973DE1 /* com.jasonelle.app.test.webview.json */; };
 		EF07303C22D28B2400973DE1 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF072F6222D28B2400973DE1 /* Media.xcassets */; };
@@ -103,12 +103,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1BD8E8486EE7AF4E4934685E /* Pods-Jasonette.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jasonette.release.xcconfig"; path = "Pods/Target Support Files/Pods-Jasonette/Pods-Jasonette.release.xcconfig"; sourceTree = "<group>"; };
-		5E3176591D1E400C00D87778 /* Jasonette.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jasonette.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BD8E8486EE7AF4E4934685E /* Pods-Africultures.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Africultures.release.xcconfig"; path = "Pods/Target Support Files/Pods-Africultures/Pods-Africultures.release.xcconfig"; sourceTree = "<group>"; };
+		5E3176591D1E400C00D87778 /* Africultures.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Africultures.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EE85B6B1DA45F8F0049EACE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		5EE85B7A1DA595A20049EACE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		BDE1A3D4D97BE5A73CB39B96 /* Pods_Jasonette.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jasonette.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BEB1DF488FABA35A255BC8E4 /* Pods-Jasonette.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jasonette.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Jasonette/Pods-Jasonette.debug.xcconfig"; sourceTree = "<group>"; };
+		BDE1A3D4D97BE5A73CB39B96 /* Pods_Africultures.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Africultures.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BEB1DF488FABA35A255BC8E4 /* Pods-Africultures.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Africultures.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Africultures/Pods-Africultures.debug.xcconfig"; sourceTree = "<group>"; };
 		EF072F5F22D28B2400973DE1 /* settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = settings.plist; sourceTree = "<group>"; };
 		EF072F6022D28B2400973DE1 /* com.jasonelle.app.test.webview.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = com.jasonelle.app.test.webview.json; sourceTree = "<group>"; };
 		EF072F6222D28B2400973DE1 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
@@ -261,7 +261,7 @@
 		EF4DEF38243D62140060AE4E /* custom.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = custom.js; sourceTree = "<group>"; };
 		EF72736623465463005C5515 /* INTUAutoRemoveObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INTUAutoRemoveObserver.m; sourceTree = "<group>"; };
 		EF72736723465463005C5515 /* INTUAutoRemoveObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INTUAutoRemoveObserver.h; sourceTree = "<group>"; };
-		EF82979222D28D96003ED64B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Jasonette/Info.plist; sourceTree = SOURCE_ROOT; };
+		EF82979222D28D96003ED64B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Africultures/Info.plist; sourceTree = SOURCE_ROOT; };
 		EF82979922D30A71003ED64B /* jr.sample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = jr.sample.json; sourceTree = "<group>"; };
 		EF9781C222D9A0810024FDAE /* home.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = home.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -272,7 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5EE85B6C1DA45F8F0049EACE /* MapKit.framework in Frameworks */,
-				ACDAE25BCC06F4D2B1364277 /* Pods_Jasonette.framework in Frameworks */,
+				ACDAE25BCC06F4D2B1364277 /* Pods_Africultures.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,8 +282,8 @@
 		024EC1D04366A4267780A921 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				BEB1DF488FABA35A255BC8E4 /* Pods-Jasonette.debug.xcconfig */,
-				1BD8E8486EE7AF4E4934685E /* Pods-Jasonette.release.xcconfig */,
+				BEB1DF488FABA35A255BC8E4 /* Pods-Africultures.debug.xcconfig */,
+				1BD8E8486EE7AF4E4934685E /* Pods-Africultures.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -294,7 +294,7 @@
 				EF072F5E22D28B2400973DE1 /* App */,
 				EF072F6122D28B2400973DE1 /* Config */,
 				EF82979822D30A71003ED64B /* Extensions */,
-				EF07A0E622D6186000D0D3FF /* Jasonette */,
+				EF07A0E622D6186000D0D3FF /* Africultures */,
 				5E31765A1D1E400C00D87778 /* Products */,
 				024EC1D04366A4267780A921 /* Pods */,
 				7CC63D0148253F040E828E0E /* Frameworks */,
@@ -304,7 +304,7 @@
 		5E31765A1D1E400C00D87778 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5E3176591D1E400C00D87778 /* Jasonette.app */,
+				5E3176591D1E400C00D87778 /* Africultures.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -314,7 +314,7 @@
 			children = (
 				5EE85B7A1DA595A20049EACE /* UIKit.framework */,
 				5EE85B6B1DA45F8F0049EACE /* MapKit.framework */,
-				BDE1A3D4D97BE5A73CB39B96 /* Pods_Jasonette.framework */,
+				BDE1A3D4D97BE5A73CB39B96 /* Pods_Africultures.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -367,7 +367,7 @@
 			path = AppDelegate;
 			sourceTree = "<group>";
 		};
-		EF07A0E622D6186000D0D3FF /* Jasonette */ = {
+		EF07A0E622D6186000D0D3FF /* Africultures */ = {
 			isa = PBXGroup;
 			children = (
 				EF05C12222DA5FE000602800 /* Tests */,
@@ -377,7 +377,7 @@
 				EF07A19522D6186100D0D3FF /* Views */,
 				EF07A1AA22D6186100D0D3FF /* Services */,
 			);
-			path = Jasonette;
+			path = Africultures;
 			sourceTree = "<group>";
 		};
 		EF07A0E722D6186000D0D3FF /* Core */ = {
@@ -1089,9 +1089,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5E3176581D1E400C00D87778 /* Jasonette */ = {
+		5E3176581D1E400C00D87778 /* Africultures */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5E3176701D1E400C00D87778 /* Build configuration list for PBXNativeTarget "Jasonette" */;
+			buildConfigurationList = 5E3176701D1E400C00D87778 /* Build configuration list for PBXNativeTarget "Africultures" */;
 			buildPhases = (
 				2358BCC5070D5513080379E3 /* [CP] Check Pods Manifest.lock */,
 				5E3176551D1E400C00D87778 /* Sources */,
@@ -1103,9 +1103,9 @@
 			);
 			dependencies = (
 			);
-			name = Jasonette;
-			productName = Jasonette;
-			productReference = 5E3176591D1E400C00D87778 /* Jasonette.app */;
+			name = Africultures;
+			productName = Africultures;
+			productReference = 5E3176591D1E400C00D87778 /* Africultures.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1115,7 +1115,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 1240;
-				ORGANIZATIONNAME = Jasonette;
+				ORGANIZATIONNAME = Africultures;
 				TargetAttributes = {
 					5E3176581D1E400C00D87778 = {
 						CreatedOnToolsVersion = 7.3;
@@ -1133,7 +1133,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5E3176541D1E400C00D87778 /* Build configuration list for PBXProject "Jasonette" */;
+			buildConfigurationList = 5E3176541D1E400C00D87778 /* Build configuration list for PBXProject "Africultures" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -1146,7 +1146,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5E3176581D1E400C00D87778 /* Jasonette */,
+				5E3176581D1E400C00D87778 /* Africultures */,
 			);
 		};
 /* End PBXProject section */
@@ -1203,7 +1203,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Jasonette-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Africultures-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1216,7 +1216,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Jasonette/Pods-Jasonette-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Africultures/Pods-Africultures-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/AFOAuth2Manager/AFOAuth2Manager.framework",
 				"${BUILT_PRODUCTS_DIR}/AHKActionSheet/AHKActionSheet.framework",
@@ -1299,7 +1299,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Jasonette/Pods-Jasonette-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Africultures/Pods-Africultures-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1486,7 +1486,7 @@
 		};
 		5E3176711D1E400C00D87778 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BEB1DF488FABA35A255BC8E4 /* Pods-Jasonette.debug.xcconfig */;
+			baseConfigurationReference = BEB1DF488FABA35A255BC8E4 /* Pods-Africultures.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "";
@@ -1497,7 +1497,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = Jasonette/Info.plist;
+				INFOPLIST_FILE = Africultures/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_CFLAGS = (
@@ -1582,7 +1582,7 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/libPhoneNumber-iOS/libPhoneNumber_iOS.framework/Headers\"",
 					"-ferror-limit=0",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jasonette.seed;
+				PRODUCT_BUNDLE_IDENTIFIER = com.africultures.seed;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -1590,7 +1590,7 @@
 		};
 		5E3176721D1E400C00D87778 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1BD8E8486EE7AF4E4934685E /* Pods-Jasonette.release.xcconfig */;
+			baseConfigurationReference = 1BD8E8486EE7AF4E4934685E /* Pods-Africultures.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "";
@@ -1601,10 +1601,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = Jasonette/Info.plist;
+				INFOPLIST_FILE = Africultures/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jasonette.seed;
+				PRODUCT_BUNDLE_IDENTIFIER = com.africultures.seed;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -1612,7 +1612,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5E3176541D1E400C00D87778 /* Build configuration list for PBXProject "Jasonette" */ = {
+		5E3176541D1E400C00D87778 /* Build configuration list for PBXProject "Africultures" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5E31766E1D1E400C00D87778 /* Debug */,
@@ -1621,7 +1621,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5E3176701D1E400C00D87778 /* Build configuration list for PBXNativeTarget "Jasonette" */ = {
+		5E3176701D1E400C00D87778 /* Build configuration list for PBXNativeTarget "Africultures" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5E3176711D1E400C00D87778 /* Debug */,
